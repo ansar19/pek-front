@@ -1,7 +1,7 @@
 <template>
   <div class="meta-table">
 
-    <h5 id="z90"> 4.1. Атмосферный воздух</h5>
+    <h5 id="z90"> 4.1. Атмосферный воздух </h5>
 
     <vue-good-table
       :columns="columns"
