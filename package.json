@@ -9,6 +9,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@tiptap/starter-kit": "^2.0.0-beta.76",
+    "@tiptap/vue-2": "^2.0.0-beta.34",
     "bootstrap": "^4.5.3",
     "chart.js": "^2.7.2",
     "core-js": "^3.6.5",
@@ -17,6 +19,7 @@
     "jszip": "^2.6.1",
     "jszip-utils": "^0.1.0",
     "lodash": "^4.17.19",
+    "remixicon": "^2.5.0",
     "shards-ui": "^2.1.0",
     "shards-vue": "^1.0.4",
     "vue": "^2.6.11",

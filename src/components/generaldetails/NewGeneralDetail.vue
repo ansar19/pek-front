@@ -24,11 +24,21 @@
                     <!--             <tiptapeditor></tiptapeditor> -->
                   </div>
 
-                  <div class="mb-3 col-md-12">
+                  <div class="mb-3 col-md-12 ">
                     <label for="exampleFormControlTextarea1" class="form-label">Периодичность производственного
                       экологического контроля</label>
-                    <textarea class="form-control" v-model="industrialEnvironmentalControlFrequency"
-                      id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <!-- <textarea class="form-control" v-model="industrialEnvironmentalControlFrequency"
+                      id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                      <!-- Tiptap -->
+
+                      <editor v-model="industrialEnvironmentalControlFrequency" />
+
+                      <!-- <div class="content">
+                        <label for="exampleFormControlTextarea1" class="form-label">Периодичность производственного
+                      экологического контроля</label>
+                        <pre><code>{{ industrialEnvironmentalControlFrequency }}</code></pre>
+                      </div> -->
+                      <!-- END Tiptap -->
                   </div>
 
                 </div>
@@ -58,9 +68,18 @@
 
 <script>
 import localizeFilter from '@/filters/localize.filter'
+import Editor from './Editor'
+
 
 export default {
+  props: {
+    value: {
+      type: String,
+      default: '',
+    },
+  },
   data: () => ({
+    // content: '<p>A Vue.js wrapper component for tiptap to use <code>v-model</code>.</p>',
     industrialObjectName:
         "ТОО «Бакырчикского горнодобывающее предприятие» (пос.Ауэзов, в 32 км к западу от асфальтированной трассы «Алматы - Усть-Каменогорск»)",
       industrialProcessBriefDescription:
@@ -71,6 +90,9 @@ export default {
   }),
   validations: {
     industrialObjectName: {  }
+  },
+  components: {
+    Editor,
   },
   // mounted() {
   //   M.updateTextFields()
@@ -100,7 +122,7 @@ export default {
 }
 </script>
 <style scoped>
-.form-control-input{
+/* .form-control-input{
   border: none;
   border-radius: 0;
   background-color: transparent;
@@ -121,5 +143,5 @@ label{
   display: block;
   line-height: 22px;
   padding: 14px 16px;
-}
+} */
 </style>

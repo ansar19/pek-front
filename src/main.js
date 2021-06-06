@@ -9,6 +9,7 @@ import '@/scss/shards-dashboards.scss';
 import '@/assets/scss/date-range.scss';
 import 'vue-select/dist/vue-select.css';
 import '@/assets/scss/meta-table.scss';
+import 'remixicon/fonts/remixicon.css'; // tiptap icons
 
 // Core
 import App from './App.vue';
