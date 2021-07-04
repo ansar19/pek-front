@@ -21,15 +21,17 @@
 
                     <div class="mb-3 col-md-12">
                       <label for="inlineFormInputName">Краткая характеристика производственного процесса</label>
-                      <textarea class="form-control" v-model="industrialProcessBriefDescription" rows="1"></textarea>
-                      <!--             <tiptapeditor></tiptapeditor> -->
+                      <!-- Tiptap -->
+                      <editor v-model="industrialProcessBriefDescription" />
+                      <!-- END Tiptap -->
                     </div>
 
                     <div class="mb-3 col-md-12">
                       <label for="exampleFormControlTextarea1" class="form-label">Периодичность производственного
                         экологического контроля</label>
-                      <textarea class="form-control" v-model="industrialEnvironmentalControlFrequency"
-                        id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <!-- Tiptap -->
+                      <editor v-model="industrialEnvironmentalControlFrequency" />
+                      <!-- END Tiptap -->
                     </div>
 
                   </div>
@@ -74,7 +76,14 @@
 
 <script>
 import localizeFilter from '@/filters/localize.filter'
+import Editor from './Editor'
 export default {
+    props: {
+    value: {
+      type: String,
+      default: '',
+    },
+  },
   data: () => ({
     industrialObjectName: "ТОО «Бакырчикского горнодобывающее предприятие» (пос.Ауэзов, в 32 км к западу от асфальтированной трассы «Алматы - Усть-Каменогорск»)",
     industrialProcessBriefDescription: "<p>Предприятие ТОО «Бакырчикское горнодобывающее предприятие» относится к горнодобывающим и металлургическим производствам. </p>Исходным сырьем является золотосодержащая руда месторождения «Бакырчик», добываемая на собственном руднике. /n Основной вид деятельности: добыча и переработка золотосодержащих руд. /n Предприятие имеет в своем составе следующие объекты:/n <ul><li>участок перемещения существующих отвалов вскрышных пород;</li><li>промышленная разработка месторождения открытым способом;</li><li>АБК карьера;</li><li>вахтовый поселок;</li><li>старая промплощадка основного промлощадка;</li><li>установка для сжигания отходов «Костер-1МА»;</li><li>водозабор подземных вод Кызыл-Ту;</li><li>обогатительная фабрика;</li><li>котельная угольная предприятия;</li><li>хвостохранилище для складирования хвостов сульфидной флотации и углеродного продукта обогатительной фабрики;</li><li>бетонно-растворный узел;</li><li>дробильно-сортировочный комплекс по изготовлению щебня;</li><li>АЗС ТОО «БГП»;</li><li>общежитие пос.Ауэзов;</li><li>участок «Глубокий лог» (отвал вскрышных пород);</li><li>участок захоронения мышьяксодержащего шлама;</li><li>железнодорожный тупик со складом ГСМ на станции Шалабай.</li></ul>",
@@ -116,6 +125,9 @@ export default {
     this.current = id
     this.industrialObjectName = industrialObjectName
     this.industrialProcessBriefDescription = industrialProcessBriefDescription
+  },
+  components: {
+    Editor,
   },
   methods: {
     async submitHandler() {

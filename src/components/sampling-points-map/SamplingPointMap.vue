@@ -5,7 +5,7 @@
 
       <div class="card-body">
         <fieldset>
-          <legend>Точки мониторинга</legend>
+          <legend class="stats-small__label text-uppercase">Точки мониторинга</legend>
 
           <div style="height: 550px; width: 100%">
 
@@ -43,10 +43,10 @@
       <div class="card-footer">
         <table class="table table-bordered" v-show="showAdditionalDetails">
           <thead class="thead-light">
-            <th style="width:5%">Наименование: </th>
-            <th style="width:5%">Долгота: </th>
-            <th style="width:5%">Широта: </th>
-            <th style="width:90%">Комментарий:</th>
+            <th style="width:5%">Наименование </th>
+            <th style="width:5%">Долгота </th>
+            <th style="width:5%">Широта </th>
+            <th style="width:85%">Комментарий</th>
           </thead>
           <tbody>
             <tr v-for="marker in airImpactSamplingPoints" :key="marker.id">
