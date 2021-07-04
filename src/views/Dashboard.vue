@@ -34,6 +34,11 @@
         <!-- <bo-wastes-by-types /> -->
       </d-col>
     </d-row>
+
+    <d-row>
+      <SamplingPointMap />
+
+    </d-row>
   </d-container>
 </template>
 
@@ -41,12 +46,14 @@
 import SmallStats from '@/components/common/SmallStats.vue';
 import DistributionByTime from '@/components/stats/DistributionByTime.vue';
 import WastesByTypes from '@/components/stats/WastesByTypes.vue';
+import SamplingPointMap from '@/components/sampling-points-map/SamplingPointMap.vue';
 
 export default {
   components: {
     SmallStats,
     boDistributionByTime: DistributionByTime,
     boWastesByTypes: WastesByTypes,
+    SamplingPointMap
   },
   data() {
     return {
