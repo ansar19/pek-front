@@ -65,6 +65,22 @@
                 </tbody>
               </table>
             </div>
+
+            <div style="height: 350px; width: 100%">
+              <div>
+                <p>Координаты точки, широта: {{ soilImpactMonitoringCoord.lat }}, долгота: {{ soilImpactMonitoringCoord.lng }}</p>
+                <!-- <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p> -->
+              </div>
+              <l-map :zoom="zoom" :center="center" :options="mapOptions" style="height: 80%"
+                @update:center="centerUpdate" @update:zoom="zoomUpdate">
+                <l-tile-layer :url="url" :attribution="attribution" />
+                <l-marker :lat-lng.sync="soilImpactMonitoringCoord" :draggable="true">
+                  <l-tooltip :options="{  permanent: true, interactive: true }">{{soilImpactSamplePoint}}
+                  </l-tooltip>
+                </l-marker>
+              </l-map>
+            </div>
+
             <button type="button" class="btn btn-primary mt-2" v-on:click='isOpen = !isOpen'>Open/Close JSON</button>
             <span v-show="isOpen">
               <pre>Debug: {{$data}}</pre>
@@ -86,6 +102,16 @@
 </template>
 
 <script>
+import {
+  latLng
+} from "leaflet";
+
+import {
+  LMap,
+  LTileLayer,
+  LMarker,
+  LTooltip
+} from "vue2-leaflet";
 
 let soilPollutantsList = [{
     polCode: "0123",
@@ -111,17 +137,38 @@ let soilPollutantsList = [{
 
 export default {
   name: 'new-soil-impact-monitoring',
-  data: () => ({
-    soilImpactSamplePoint: null,
-    soilImpactsLimitsTable: [{
-      soilPollutant: "",
-      soilPollutionLimit: ""
-    }],
-    isOpen: false // toggle pre json data
-  }),
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LTooltip
+  },
+  data() {
+    return {
+      soilImpactSamplePoint: null,
+      soilImpactsLimitsTable: [{
+        soilPollutant: "",
+        soilPollutionLimit: ""
+      }],
+      // leaflet data
+      zoom: 13,
+      center: latLng(51.160539, 71.470364),
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      soilImpactMonitoringCoord: latLng(51.1605227, 71.4703558),
+      currentZoom: 11.5,
+      currentCenter: latLng(51.160539, 71.470364),
+      showParagraph: false,
+      mapOptions: {
+        zoomSnap: 0.5,
+        draggable: true
+      },
+      // debug
+      isOpen: false // toggle pre json data
+    }
+  },
   computed: {
     options: () => soilPollutantsList,
-
   },
   methods: {
     addSoilImpactLimit() {
@@ -135,6 +182,12 @@ export default {
     },
     goBack() {
       this.$router.go(-1);
+    },
+    zoomUpdate(zoom) {
+      this.currentZoom = zoom;
+    },
+    centerUpdate(center) {
+      this.currentCenter = center;
     },
   }
 }
