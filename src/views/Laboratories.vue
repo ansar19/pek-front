@@ -40,7 +40,7 @@ export default {
         },
         {
           id: 2,
-          laboratoryName: 'Лаборатория 2',
+          laboratoryName: 'ТОО БГП',
           labAttestateNumber: 24,
           accreditationIssueDate: '2011-10-31',
           accreditationDueDate: '2011-10-31',

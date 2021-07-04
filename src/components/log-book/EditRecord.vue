@@ -486,7 +486,7 @@ let laboratoriesList = [{
   },
   {
     laboratoryId: "0143",
-    laboratoryName: "лаборатория 2"
+    laboratoryName: "ТОО БГП"
   },
 ];
 
