@@ -13,11 +13,11 @@
               </tr>
               <tr>
                 <th class="text-left">Краткая характеристика производственного процесса:</th>
-                <td>{{ gd.industrialProcessBriefDescription }}</td>
+                <td class="text-left"><span v-html="gd.industrialProcessBriefDescription"></span></td>
               </tr>
               <tr>
                 <th class="text-left">Периодичность производственного экологического контроля:</th>
-                <td>{{ gd.industrialEnvironmentalControlFrequency }}</td>
+                <td class="text-left"><div v-html="span('Hello world')" /></td>
               </tr>
             </table>
           </div>
@@ -50,6 +50,9 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
+    span(text) {
+      return `<span> ${this.generalDetails[0].industrialEnvironmentalControlFrequency} </span>`
+   }
   },
 };
 </script>
