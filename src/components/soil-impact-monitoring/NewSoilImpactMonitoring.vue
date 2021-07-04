@@ -152,12 +152,12 @@ export default {
       }],
       // leaflet data
       zoom: 13,
-      center: latLng(51.160539, 71.470364),
+      center: latLng(49.7130280, 81.5851838),
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      soilImpactMonitoringCoord: latLng(51.1605227, 71.4703558),
+      soilImpactMonitoringCoord: latLng(49.72274303391478, 81.56840791897655),
       currentZoom: 11.5,
-      currentCenter: latLng(51.160539, 71.470364),
+      currentCenter: latLng(49.7130280, 81.5851838),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
