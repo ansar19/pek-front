@@ -5,13 +5,13 @@
 
       <div class="card-body">
         <fieldset>
-          <legend>Точки мониторинга</legend>
+          <legend class="stats-small__label text-uppercase">Точки мониторинга</legend>
 
-          <div style="height: 350px; width: 100%">
+          <div style="height: 550px; width: 100%">
 
             <l-map :zoom="zoom" :center="center">
               <l-control-layers ref="control"></l-control-layers>
-              <l-tile-layer :url="url" :attribution="attribution" name="base" layer-type="base"></l-tile-layer>
+              <l-tile-layer :url="url" :attribution="attribution" name="Основная" layer-type="base"></l-tile-layer>
               <l-layer-group layer-type="overlay" name="Точки мониторинга почв" :visible="true">
                 <l-marker v-for="marker in soilImpactSamplingPoints" :key="marker.id" :visible="marker.visible"
                   :lat-lng="marker.position">
@@ -23,15 +23,44 @@
               <l-layer-group layer-type="overlay" name="Точки мониторинга воздуха" :visible="true">
                 <l-marker v-for="marker in airImpactSamplingPoints" :key="marker.id" :visible="marker.visible"
                   :lat-lng="marker.position">
-                  <l-tooltip :options="{  permanent: true, interactive: true }">{{marker.airImpactSamplePoint}}
+                  <l-tooltip>{{marker.airImpactSamplePoint}}
                   </l-tooltip>
+                  <l-popup >
+                    <div>
+                      <p>
+                        {{marker.comment}}
+                      </p>
+                    </div>
+                  </l-popup>
                 </l-marker>
               </l-layer-group>
 
             </l-map>
           </div>
         </fieldset>
+        <button type="button" class="btn btn-primary mt-2" @click="showLongText">Show/Hide</button>
       </div>
+      <div class="card-footer">
+        <table class="table table-bordered" v-show="showAdditionalDetails">
+          <thead class="thead-light">
+            <th style="width:5%">Наименование </th>
+            <th style="width:5%">Долгота </th>
+            <th style="width:5%">Широта </th>
+            <th style="width:85%">Комментарий</th>
+          </thead>
+          <tbody>
+            <tr v-for="marker in airImpactSamplingPoints" :key="marker.id">
+              <td>{{marker.airImpactSamplePoint}}</td>
+              <td> {{marker.position.lat}} </td>
+              <td> {{marker.position.lng}} </td>
+              <td>
+                {{marker.comment}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </template>
@@ -46,6 +75,7 @@ import {
   LTileLayer,
   LMarker,
   LTooltip,
+  LPopup,
   LControlLayers,
   LLayerGroup
 } from "vue2-leaflet";
@@ -58,6 +88,7 @@ export default {
     LTileLayer,
     LMarker,
     LTooltip,
+    LPopup,
     LControlLayers,
     LLayerGroup
   },
@@ -75,8 +106,8 @@ export default {
             lat: 49.715072170695755,
             lng: 81.58168414841649
           },
-          soilImpactSamplePoint: "Soil 1",
-          draggable: true,
+          soilImpactSamplePoint: "Обобщенная граница СЗЗ предприятия. Площадка № 1",
+          draggable: false,
           visible: true
         },
         {
@@ -85,8 +116,8 @@ export default {
             lat: 49.712832935988885,
             lng: 81.56802669568184
           },
-          soilImpactSamplePoint: "Soil 2",
-          draggable: true,
+          soilImpactSamplePoint: "Обобщенная граница СЗЗ предприятия. Площадка № 2",
+          draggable: false,
           visible: true
         },
         {
@@ -95,19 +126,20 @@ export default {
             lat: 49.72638780619652,
             lng: 81.55979480027639
           },
-          soilImpactSamplePoint: "Soil 3",
-          draggable: true,
+          soilImpactSamplePoint: "Обобщенная граница СЗЗ предприятия. Площадка № 3",
+          draggable: false,
           visible: true
         }
       ],
       airImpactSamplingPoints: [{
           id: "k1",
           position: {
-            lat: 49.72274303391478,
-            lng: 81.56840791897655
+            lat: 49.7134916305684,
+            lng: 81.5604373358692
           },
-          airImpactSamplePoint: "Air 1",
-          draggable: true,
+          airImpactSamplePoint: "Граница СЗЗ предприятия №1",
+          comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi. Donec finibus semper metus id malesuada.",
+          draggable: false,
           visible: true
         },
         {
@@ -116,11 +148,13 @@ export default {
             lat: 49.72274,
             lng: 81.5684
           },
-          airImpactSamplePoint: "Air 2",
-          draggable: true,
+          airImpactSamplePoint: "Граница СЗЗ предприятия №2",
+          comment: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?",
+          draggable: false,
           visible: true
         },
       ],
+      showAdditionalDetails: false,
     }
   },
   computed: {},
@@ -130,6 +164,9 @@ export default {
     },
     centerUpdate(center) {
       this.currentCenter = center;
+    },
+    showLongText() {
+      this.showAdditionalDetails = !this.showAdditionalDetails;
     },
   }
 }

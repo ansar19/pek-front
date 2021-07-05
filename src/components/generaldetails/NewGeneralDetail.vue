@@ -20,24 +20,14 @@
 
                   <div class="mb-3 col-md-12">
                     <label for="inlineFormInputName">Краткая характеристика производственного процесса</label>
-                    <textarea class="form-control" v-model="industrialProcessBriefDescription" rows="1"></textarea>
-                    <!--             <tiptapeditor></tiptapeditor> -->
+                    <editor v-model="industrialProcessBriefDescription" />
                   </div>
 
                   <div class="mb-3 col-md-12 ">
                     <label for="exampleFormControlTextarea1" class="form-label">Периодичность производственного
                       экологического контроля</label>
-                    <!-- <textarea class="form-control" v-model="industrialEnvironmentalControlFrequency"
-                      id="exampleFormControlTextarea1" rows="3"></textarea> -->
                       <!-- Tiptap -->
-
                       <editor v-model="industrialEnvironmentalControlFrequency" />
-
-                      <!-- <div class="content">
-                        <label for="exampleFormControlTextarea1" class="form-label">Периодичность производственного
-                      экологического контроля</label>
-                        <pre><code>{{ industrialEnvironmentalControlFrequency }}</code></pre>
-                      </div> -->
                       <!-- END Tiptap -->
                   </div>
 
