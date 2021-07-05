@@ -68,7 +68,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(pollutant, index) in controllablePollutants" :key="index">
+                    <tr v-for="(pollutant, index) in airEmissionSourcesControl" :key="index">
                       <td>{{index+1}}</td>
                       <td>{{pollutant.polCode}}
                         <!--           <input v-model="pollutant.polCode" /> -->
@@ -145,7 +145,7 @@ export default {
       }
     ],
     selectedPollutant: "",
-    controllablePollutants: [],
+    airEmissionSourcesControl: [],
     title: '',
     utilizatorPhone: '',
     utilizatorBankDetail: ''
@@ -159,12 +159,12 @@ export default {
   // },
   computed: {
     quantity() {
-      return this.controllablePollutants.length;
+      return this.airEmissionSourcesControl.length;
     }
   },
   methods: {
     addAnother() {
-      this.controllablePollutants.push({
+      this.airEmissionSourcesControl.push({
         id: new Date().getTime(), // generate "unique" id
         polCode: this.selectedPollutant.polCode,
         polName: this.selectedPollutant.polName,
@@ -175,7 +175,7 @@ export default {
       // this.clearAllFields();
     },
     removeOne(index) {
-      this.controllablePollutants.splice(index, 1);
+      this.airEmissionSourcesControl.splice(index, 1);
     },
     save(event) {
       alert(JSON.stringify(this.$data))

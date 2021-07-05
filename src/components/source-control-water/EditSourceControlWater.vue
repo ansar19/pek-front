@@ -27,7 +27,7 @@
                 <th style="width: 40%;">Наименование загрязняющих веществ</th>
                 <th style="width: 20%;">Установленный норматив (миллиграмм на дециметр кубический; тонн в год)</th>
               </tr>
-              <tr v-for="waterEmissionSource, index in waterEmissionSources" :key="index">
+              <tr v-for="waterEmissionSource, index in waterEmissionSourcesControl" :key="index">
                 <td>{{ waterEmissionSourceName }}</td>
                 <td>
                   <v-select :options="options" label="waterPolName" :value="waterEmissionSource.waterLimitPolName"
@@ -116,7 +116,7 @@ const waterPolList = [
 
 export default {
   data: () => ({
-    waterEmissionSources: [
+    waterEmissionSourcesControl: [
       {
         uid: 1,
         waterEmissionSourceName: "выпуск ВП 10 (х/б сточные воды до очистных сооружений)",

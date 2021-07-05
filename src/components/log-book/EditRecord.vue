@@ -51,7 +51,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr v-for="(pollutant, index) in controllablePollutants" :key="index">
+                            <tr v-for="(pollutant, index) in airEmissionSourcesControl" :key="index">
                               <td data-label="Наименование источников выброса (номер источника выброса)"
                                 class="align-middle">
                                 {{ pollutant.emissionSourceName}} ({{ pollutant.emissionSourceNumber}})
@@ -99,7 +99,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr v-for="waterEmissionSource, index in waterEmissionSources" :key="index">
+                            <tr v-for="waterEmissionSource, index in waterEmissionSourcesControl" :key="index">
                               <td data-label="Наименование источников воздействия (контрольные точки)" class="align-middle">
                                 {{ waterEmissionSourceName }}</td>
                               <td data-label="Наименование загрязняющих веществ" class="align-middle">
@@ -495,7 +495,7 @@ export default {
     return {
       samplingDate: new Date(),
       laboratoryName: 'Аналитическая лаборатория ТОО «Лаборатория Атмосфера»',
-      controllablePollutants: [{
+      airEmissionSourcesControl: [{
           emissionSourceName: 'Строительные работы',
           emissionSourceNumber: '6001',
 
@@ -543,7 +543,7 @@ export default {
           actionItem: ""
         }
       ],
-      waterEmissionSources: [{
+      waterEmissionSourcesControl: [{
           uid: 1,
           waterEmissionSourceName: "выпуск ВП 10 (х/б сточные воды до очистных сооружений)",
           waterLimitPolName: "Азот аммонийный",

@@ -24,9 +24,7 @@
                         <div class="col-6">
                           <div class="form-group">
                             <label for="sampling-date">Лаборатория:</label>
-                            <v-select :options="laboratoriesList" label="laboratoryName"
-                        v-model="laboratoryName" />
-
+                            <v-select :options="laboratoriesList" label="laboratoryName" v-model="laboratoryName" />
                           </div>
                         </div>
                       </div>
@@ -39,38 +37,62 @@
                         <table class="meta-table">
                           <thead>
                             <tr>
-                              <th class="align-middle">Наименование источников выброса (номер источника выброса)</th>
-                              <th class="align-middle">Код загрязняющих веществ</th>
-                              <th class="align-middle">Наименование загрязняющих веществ</th>
-                              <th class="align-middle text-right">Установленный норматив (грамм в секунду; тонна в год)
+                              <th class="align-middle" :class="sortedClass('emissionSourceName')"
+                                @click="sortBy('emissionSourceName')">Наименование источников выброса (номер источника
+                                выброса)</th>
+                              <th class="align-middle" :class="sortedClass('polCode')" @click="sortBy('polCode')">Код и Наименование ЗВ
                               </th>
-                              <th class="align-middle">Фактический результат мониторинга (грамм в секунду; тонн в
-                                квартал, тонн в год)</th>
+                              <th class="align-middle text-right">Установленный норматив (г/сек; т/год)
+                              </th>
+                              <th class="align-middle text-right"
+                                :class="sortedClass('airEmissionSourcesControlMethod')"
+                                @click="sortBy('airEmissionSourcesControlMethod')">Метод контроля
+                              </th>
+                              <th class="align-middle">Фактический результат мониторинга (г/сек; т/квартал, т/год)                                )</th>
                               <th class="align-middle">Превышение нормативов предельно допустимых выбросов</th>
+                              <th class="align-middle">Исполнитель</th>
                               <th class="align-middle"> Мероприятия по устранению нарушения</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr v-for="(pollutant, index) in controllablePollutants" :key="index">
+                            <tr v-for="(pollutant, index) in sortedItems" :key="index">
                               <td data-label="Наименование источников выброса (номер источника выброса)"
                                 class="align-middle">
                                 {{ pollutant.emissionSourceName}} ({{ pollutant.emissionSourceNumber}})
                               </td>
-                              <td data-label="Код ЗВ" class="align-middle">
-                                {{ pollutant.polCode }}
-                              </td>
-                              <td data-label="Наименование ЗВ" class="align-middle">
-                                {{ pollutant.polName }}
+                              <td data-label="Код и Наименование ЗВ" class="align-middle">
+                                {{ pollutant.polCode }} - {{ pollutant.polName }}
                               </td>
                               <td data-label="Установленный норматив (г/сек; т/год)" class="text-right align-middle">
                                 {{ pollutant.limit }}
                               </td>
-                              <td data-label="Фактический результат мониторинга (г/сек; т/кв, т/год)"
+                              <td data-label="Метод контроля" class="align-middle">
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio"
+                                      v-model="pollutant.airEmissionSourcesControlMethod" value="instrumental">
+                                    Инструментальный
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" value="calculated"
+                                      v-model="pollutant.airEmissionSourcesControlMethod">
+                                    Расчетный
+                                  </label>
+                                </div>
+                              </td>
+                              <td data-label="Фактический результат мониторинга (г/сек; т/квартал, т/год)"
                                 class="align-middle">
                                 <input type="number" class="form-control" v-model="pollutant.actual" />
                               </td>
                               <td data-label="Превышение нормативов предельно допустимых выбросов" class="align-middle">
                                 {{(pollutant.limit - pollutant.actual)}}</td>
+<td data-label="Превышение нормативов предельно допустимых выбросов" class="align-middle">
+                                <div class="form-group">
+                            <v-select :options="laboratoriesList" label="laboratoryName" v-model="pollutant.laboratoryName" />
+                          </div>
+</td>
                               <td data-label="Мероприятия по устранению нарушения" class="align-middle"><textarea
                                   class="form-control" rows="1" v-model="pollutant.actionItem"></textarea></td>
                             </tr>
@@ -99,22 +121,26 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr v-for="waterEmissionSource, index in waterEmissionSources" :key="index">
-                              <td data-label="Наименование источников воздействия (контрольные точки)" class="align-middle">
+                            <tr v-for="waterEmissionSource, index in waterEmissionSourcesControl" :key="index">
+                              <td data-label="Наименование источников воздействия (контрольные точки)"
+                                class="align-middle">
                                 {{ waterEmissionSourceName }}</td>
                               <td data-label="Наименование загрязняющих веществ" class="align-middle">
                                 {{ waterEmissionSource.waterLimitPolName }}
                               </td>
-                              <td data-label="Установленный норматив (миллиграмм на дециметр кубический; тонн в год)" class="text-right align-middle">
+                              <td data-label="Установленный норматив (миллиграмм на дециметр кубический; тонн в год)"
+                                class="text-right align-middle">
                                 {{ waterEmissionSource.waterSourceLimit }}
 
                               </td>
                               <td
-                                data-label="Фактический результат мониторинга, (миллиграмм на дециметр кубический; тонн в квартал; тонн в год)" class="align-middle">
+                                data-label="Фактический результат мониторинга, (миллиграмм на дециметр кубический; тонн в квартал; тонн в год)"
+                                class="align-middle">
                                 <input type="number" class="form-control"
                                   v-model="waterEmissionSource.waterSourceActual" />
                               </td>
-                              <td data-label="Соблюдение либо превышение нормативов предельно допустимых сбросов" class="align-middle">
+                              <td data-label="Соблюдение либо превышение нормативов предельно допустимых сбросов"
+                                class="align-middle">
                                 соблюдение</td>
                               <td data-label="Мероприятия по устранению нарушения" class="align-middle">
                                 <textarea class="form-control" rows="1"
@@ -197,7 +223,7 @@
                                 {{ soilControlPoint.soilPollutantName }}
                               </td>
                               <td data-label="Установленный норматив (мг / кг)" class="text-right">
-                              {{ soilControlPoint.soilLimit }}
+                                {{ soilControlPoint.soilLimit }}
                               </td>
                               <td data-label="Фактический результат мониторинга (мг / кг)">
                                 <input type="number" class="form-control"
@@ -234,12 +260,15 @@
                           </thead>
                           <tbody>
                             <tr v-for="radiationControlPoint, index in radiationControlPoints" :key="index">
-                              <td data-label="Наименование источников воздействия" class="align-middle">{{ radiationControlPointName }}</td>
-                              <td data-label="Установленный норматив (единица измерения в микрозивертах в час*)" class="text-right align-middle">
+                              <td data-label="Наименование источников воздействия" class="align-middle">
+                                {{ radiationControlPointName }}</td>
+                              <td data-label="Установленный норматив (единица измерения в микрозивертах в час*)"
+                                class="text-right align-middle">
                                 {{ radiationControlPoint.radiationLimit }}
                               </td>
                               <td
-                                data-label="Фактический результат мониторинга (единица измерения в микрозивертах в час*)" class="align-middle">
+                                data-label="Фактический результат мониторинга (единица измерения в микрозивертах в час*)"
+                                class="align-middle">
                                 <input type="number" class="form-control"
                                   v-model.number="radiationControlPoint.radiationActual" /></td>
                               <td
@@ -291,18 +320,18 @@
                                 {{ airImpactsLimitsTable[n].airPollutant.polName }}
                               </td>
                               <td data-label="Норма ПДК (макс. разовых, мг/м3)" class="text-right align-middle">
-                              {{ airImpactsLimitsTable[n].airPollutionLimit }}
-                                </td>
+                                {{ airImpactsLimitsTable[n].airPollutionLimit }}
+                              </td>
                               <td data-label="Фактическая концентрация" class="align-middle">
                                 <input class="form-control" :id="'pollutant-limit'+n"
                                   v-model.number="airImpactsLimitsTable[n].airPollutionActual" type="number"></td>
                               <td data-label="Наличие превышения ПДК, кратность" class="align-middle">
                                 <input class="form-control" :id="'pollutant-limit'+n"
                                   v-model.number="airImpactsLimitsTable[n].airPollutionExcess" type="number"></td>
-                              <td data-label="Предложения по устранению нарушений и улучшению экологической обстановки" class="align-middle">
+                              <td data-label="Предложения по устранению нарушений и улучшению экологической обстановки"
+                                class="align-middle">
                                 <textarea class="form-control" rows="1"
-                                  v-model="airImpactsLimitsTable[n].airPollutionControlMeasure"
-                                  ></textarea></td>
+                                  v-model="airImpactsLimitsTable[n].airPollutionControlMeasure"></textarea></td>
                             </tr>
                           </tbody>
                         </table>
@@ -343,15 +372,16 @@
                                 {{ waterImpactsLimitsTable[n].waterPollutant.waterPolName }}
                               </td>
                               <td data-label="Норма ПДК (макс. разовых, мг/м3)" class="text-right align-middle">
-                              {{ waterImpactsLimitsTable[n].waterPollutionLimit }}
-                                </td>
+                                {{ waterImpactsLimitsTable[n].waterPollutionLimit }}
+                              </td>
                               <td data-label="Фактическая концентрация" class="align-middle">
                                 <input class="form-control" :id="'pollutant-limit'+n"
                                   v-model.number="waterImpactsLimitsTable[n].waterPollutionActual" type="number"></td>
                               <td data-label="Наличие превышения ПДК, кратность" class="align-middle">
                                 <input class="form-control" :id="'pollutant-limit'+n"
                                   v-model.number="waterImpactsLimitsTable[n].waterPollutionExcess" type="number"></td>
-                              <td data-label="Предложения по устранению нарушений и улучшению экологической обстановки" class="align-middle">
+                              <td data-label="Предложения по устранению нарушений и улучшению экологической обстановки"
+                                class="align-middle">
                                 <textarea class="form-control" rows="1"
                                   v-model="waterImpactsLimitsTable[n].waterPollutionControlMeasure"></textarea></td>
                             </tr>
@@ -390,19 +420,20 @@
                             <tr v-for="(f,n) in soilImpactsLimitsTable" :key="n">
                               <td data-label="Точки отбора проб" class="align-middle">{{ soilImpactSamplePoint }}</td>
                               <td data-label="Наименование загрязняющих веществ" class="align-middle">
-                                  {{soilImpactsLimitsTable[n].soilPollutant.soilPolCode}}
-                                  {{soilImpactsLimitsTable[n].soilPollutant.soilPolName}}
+                                {{soilImpactsLimitsTable[n].soilPollutant.soilPolCode}}
+                                {{soilImpactsLimitsTable[n].soilPollutant.soilPolName}}
                               </td>
                               <td data-label="Норма ПДК (макс. разовых, мг/м3)" class="text-right align-middle">
-                              {{ soilImpactsLimitsTable[n].soilPollutionLimit }}
-                                </td>
+                                {{ soilImpactsLimitsTable[n].soilPollutionLimit }}
+                              </td>
                               <td data-label="Фактическая концентрация" class="align-middle">
                                 <input class="form-control" :id="'pollutant-limit'+n"
                                   v-model.number="soilImpactsLimitsTable[n].soilPollutionActual" type="number"></td>
                               <td data-label="Наличие превышения ПДК, кратность" class="align-middle">
                                 <input class="form-control" :id="'pollutant-limit'+n"
                                   v-model.number="soilImpactsLimitsTable[n].soilPollutionExcess" type="number"></td>
-                              <td data-label="Предложения по устранению нарушений и улучшению экологической обстановки" class="align-middle">
+                              <td data-label="Предложения по устранению нарушений и улучшению экологической обстановки"
+                                class="align-middle">
                                 <textarea class="form-control" rows="1"
                                   v-model="soilImpactsLimitsTable[n].soilPollutionControlMeasure"></textarea></td>
                             </tr>
@@ -428,6 +459,7 @@
                         >{{ "Message_EnterDescription" | localize }}</span
                       > -->
                       </div>
+                      <!-- END Описание / комментарий -->
                     </d-form>
                   </d-col>
                 </d-row>
@@ -471,13 +503,24 @@ let laboratoriesList = [{
 export default {
   data() {
     return {
+      sort: {
+        key: '',
+        isAsc: false
+      },
+      // items: [
+      //   { id: 1, name: 'taro', age: 20, airEmissionSourcesControlMethod: 'instrumental' },
+      //   { id: 2, name: 'jiro', age: 15, airEmissionSourcesControlMethod: 'calculated' },
+      //   { id: 3, name: 'saburo', age: 18, airEmissionSourcesControlMethod: 'instrumental' },
+      //   { id: 4, name: 'shiro', age: 14, airEmissionSourcesControlMethod: 'calculated' },
+      // ],
       samplingDate: new Date(),
       laboratoryName: '',
-      controllablePollutants: [{
+      airEmissionSourcesControl: [{
+        id: 1,
         emissionSourceName: 'Строительные работы',
+        airEmissionSourcesControlMethod: 'instrumental',
+        laboratoryName: {},
         emissionSourceNumber: '6001',
-
-
           polCode: "0123",
           polName: "Железо (II, III) оксиды (диЖелезо триоксид, Железа оксид) /в пересчете на (274)",
           actual: "0.002445",
@@ -485,7 +528,10 @@ export default {
           actionItem: ""
         },
         {
+          id: 2,
           emissionSourceName: 'Строительные работы',
+          airEmissionSourcesControlMethod: 'calculated',
+          laboratoryName: {},
         emissionSourceNumber: '6001',
           polCode: "0143",
           polName: "Марганец и его соединения /в пересчете на марганца (IV) оксид/ (327)",
@@ -494,7 +540,10 @@ export default {
           actionItem: ""
         },
         {
+          id: 3,
           emissionSourceName: 'Строительные работы',
+          airEmissionSourcesControlMethod: 'instrumental',
+          laboratoryName: {},
         emissionSourceNumber: '6001',
           polCode: "2902",
           polName: "Взвешенные частицы (116)",
@@ -503,8 +552,11 @@ export default {
           actionItem: ""
         },
         {
+          id: 4,
           emissionSourceName: 'Строительные работы',
-        emissionSourceNumber: '6001',
+          airEmissionSourcesControlMethod: 'calculated',
+          laboratoryName: {},
+          emissionSourceNumber: '6001',
           polCode: "2754",
           polName: "Алканы С12-19 (Углеводороды предельные С12-19)",
           actual: "0.00094",
@@ -512,7 +564,10 @@ export default {
           actionItem: ""
         },
         {
+          id: 5,
           emissionSourceName: 'Строительные работы',
+          airEmissionSourcesControlMethod: 'instrumental',
+          laboratoryName: {},
         emissionSourceNumber: '6001',
           polCode: "0337",
           polName: "Углерод оксид (Угарный газ) (584)",
@@ -521,7 +576,7 @@ export default {
           actionItem: ""
         }
       ],
-      waterEmissionSources: [{
+      waterEmissionSourcesControl: [{
           uid: 1,
           waterEmissionSourceName: "выпуск ВП 10 (х/б сточные воды до очистных сооружений)",
           waterLimitPolName: "Азот аммонийный",
@@ -754,6 +809,13 @@ export default {
     };
   },
   methods: {
+    sortedClass (key) {
+      return this.sort.key === key ? `sorted ${this.sort.isAsc ? 'asc' : 'desc' }` : '';
+    },
+    sortBy (key) {
+      this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : false;
+      this.sort.key = key;
+    },
     soillControlSubTotal(soilControlPoint) {
       return (soilControlPoint.soilLimit - soilControlPoint.soilActual)
     },
@@ -762,6 +824,19 @@ export default {
     },
   },
   computed: {
+    sortedItems () {
+      const list = this.airEmissionSourcesControl.slice();  // Because the order of data is not rewritten at the time of sorting
+      if (!!this.sort.key) {
+        list.sort((a, b) => {
+          a = a[this.sort.key]
+          b = b[this.sort.key]
+
+          return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1)
+        });
+      }
+      
+      return list;
+    },
     laboratoriesList: () => laboratoriesList,
     wasteSourceLimitsoillControlSubTotal() {
       return this.wasteDisposalSites.reduce(
@@ -779,5 +854,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+/* sort */
+table {
+  th.sorted {
+    &.asc::after {
+      display: inline-block;
+      content: '▼';
+    }
+    &.desc::after {
+      display: inline-block;
+      content: '▲';
+    }
+  }
+}
 </style>

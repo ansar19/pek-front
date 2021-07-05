@@ -68,7 +68,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(pollutant, index) in controllablePollutants" :key="index">
+                    <tr v-for="(pollutant, index) in airEmissionSourcesControl" :key="index">
                       <td>{{index+1}}</td>
                       <td>{{pollutant.polCode}}
                         <!--           <input v-model="pollutant.polCode" /> -->
@@ -150,7 +150,7 @@ export default {
       }
     ],
     selectedPollutant: "",
-    controllablePollutants: [
+    airEmissionSourcesControl: [
       {
         polCode: "0123",
         polName: "Железо (II, III) оксиды (диЖелезо триоксид, Железа оксид) /в пересчете на (274)"
