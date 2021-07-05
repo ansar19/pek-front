@@ -3,7 +3,7 @@
     <d-row no-gutters class="page-header py-4">
       <d-col lg="12" md="12">
         <d-card class="card-small">
-          <!-- Form Example -->
+          <!-- Form -->
           <d-card-header class="border-bottom">
             <h6 class="m-0">Новый лимит эмиссии</h6>
           </d-card-header>
@@ -14,7 +14,6 @@
 
                 <div class="form-row">
                   <div class="form-group col-md-12">
-
                     <!--   Разрешение на эмиссии  - год зв, дата начала и конца разрешения       -->
                     <!--     Источники выбросов подлежащие контролю - номер и название        -->
                     <!--        ЗВ подлежащий учету - код и название + лимит    -->
@@ -39,14 +38,12 @@
                 </div>
 
                 <div class="form-group">
-
                   <label for="sampling-date">Выбор Источника Выбросов:</label>
                   <v-select :options="emissionSourcesList" label="emissionSourceName" v-model="selectedEmissionSource">
                   </v-select>
                 </div>
 
                 <div class="form-group">
-
                   <label for="sampling-date">ЗВ по которому установлен лимит:</label>
                   <v-select :options="pollutantsList" label="polName" v-model="selectedPollutant"></v-select>
                 </div>
@@ -57,29 +54,37 @@
           <button type="button" class="btn btn-danger" @click.prevent="deleteArray">Удалить все</button> -->
                 </div>
 
-                <table class="table table-responsive">
+                <table class="meta-table">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Код загрязняющих веществ</th>
-                      <th>Наименование загрязняющих веществ</th>
-                      <th>Установленный норматив (грамм в секунду; тонна в год)</th>
-                      <th></th>
+                      <th style="width: 5%;">#</th>
+                      <th style="width: 5%;">Код загрязняющих веществ</th>
+                      <th style="width: 30%;">Наименование загрязняющих веществ</th>
+                      <th style="width: 20%;">Установленный норматив (грамм в секунду; тонна в год)</th>
+                      <th style="width: 30%;">Перидичность контроля</th>
+                      <th style="width: 10%;"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(pollutant, index) in airEmissionSourcesControl" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{pollutant.polCode}}
+                      <td data-label="#" class="align-middle">{{index+1}}</td>
+                      <td data-label="Код ЗВ" class="align-middle">{{pollutant.polCode}}
                         <!--           <input v-model="pollutant.polCode" /> -->
                       </td>
-                      <td>{{pollutant.polName}}
+                      <td data-label="Наименование ЗВ" class="align-middle">{{pollutant.polName}}
                         <!--           <input v-model="pollutant.polName" /> -->
                       </td>
-                      <td><input type="number" class="form-control" v-model="pollutant.gSecLimit" /></td>
-                      <td>
+                      <td data-label="Установленный норматив" class="align-middle"><input type="number"
+                          class="form-control" v-model="pollutant.gSecLimit" /></td>
+                      <td data-label="Перидичность контроля" class="align-middle">
+                        <div class="form-group">
+                          <v-select :options="controlPeriodicityList" label="controlPeriodicityName"
+                            v-model="pollutant.controlPeriodicity" />
+                        </div>
+                      </td>
+                      <td class="align-middle">
                         <div class="col-sm-2 text-left">
-                          <button type="button" class="btn btn-sm btn-light" @click.prevent="removeOne(index)"
+                          <button type="button" class="btn btn-sm btn-outline-danger" @click.prevent="removeOne(index)"
                             v-show="quantity > 1">
                             <span aria-hidden="true">×</span>
                             Удалить
@@ -107,6 +112,24 @@
 
 <script>
 import localizeFilter from '@/filters/localize.filter'
+
+let controlPeriodicityList = [{
+    controlPeriodicityName: 'Ежемесячно',
+    controlPeriodicity: 'monthly'
+  },
+  {
+    controlPeriodicityName: 'Ежеквартально',
+    controlPeriodicity: 'quarterly'
+  },
+  {
+    controlPeriodicityName: 'Полугодовой',
+    controlPeriodicity: 'semiannual'
+  },
+  {
+    controlPeriodicityName: 'Годовой',
+    controlPeriodicity: 'yearly'
+  }
+];
 
 export default {
   data: () => ({
@@ -160,7 +183,8 @@ export default {
   computed: {
     quantity() {
       return this.airEmissionSourcesControl.length;
-    }
+    },
+    controlPeriodicityList: () => controlPeriodicityList,
   },
   methods: {
     addAnother() {

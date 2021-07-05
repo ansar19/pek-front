@@ -22,10 +22,10 @@
                         </div>
 
                         <div class="col-6">
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label for="sampling-date">Лаборатория:</label>
                             <v-select :options="laboratoriesList" label="laboratoryName" v-model="laboratoryName" />
-                          </div>
+                          </div> -->
                         </div>
                       </div>
 
