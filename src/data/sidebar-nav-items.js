@@ -88,5 +88,12 @@ export default function () {
       name: 'soil-impact-monitoring',
     },
    },
+   {
+    title: 'Операционный мониторинг',
+    htmlBefore: '<i class="material-icons">engineering</i>',
+    to: {
+      name: 'operational-monitoring',
+    },
+   },
  ];
 }

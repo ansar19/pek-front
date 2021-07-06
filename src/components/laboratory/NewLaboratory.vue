@@ -46,6 +46,12 @@
                     <textarea id="laboratory-accreditation-scope" type="textarea" v-model="accreditationScopeArea"
                       class="form-control"></textarea>
                   </div>
+
+                  <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Аттестат аккредитации лаборатории</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                  </div>
+
                 </div>
               </form>
             </div>

@@ -16,6 +16,7 @@ import RadiationMonitoring from './views/RadiationMonitoring.vue';
 import AirImpactMonitoring from './views/AirImpactMonitoring.vue';
 import WaterImpactMonitoring from './views/WaterImpactMonitoring.vue';
 import SoilImpactMonitoring from './views/SoilImpactMonitoring.vue';
+import OperationalMonitoring from './views/OperationalMonitoring.vue';
 
 Vue.use(Router);
 
@@ -288,6 +289,31 @@ export default new Router({
       component: () => import('./components/soil-impact-monitoring/ShowSoilImpactMonitoring.vue')
     },
 
+    {
+      path: '/operational-monitoring',
+      name: 'operational-monitoring',
+      component: OperationalMonitoring,
+    },
+    {
+      path: '/new-operational-monitoring', // - настройка
+      name: 'new-operational-monitoring',
+      component: () => import('./components/operational-monitoring/NewOperationalMonitoring.vue')
+    },
+    // {
+    //   path: '/edit-source-control-water', - редактирование настроики
+    //   name: 'edit-source-control-water',
+    //   component: () => import('./components/operational-monitoring/EditSourceControlWater.vue')
+    // },
+    // {
+    //   path: '/edit-source-control-water', - новая запись ????
+    //   name: 'edit-source-control-water',
+    //   component: () => import('./components/operational-monitoring/EditSourceControlWater.vue')
+    // },
+    // {
+    //   path: '/show-source-control-water', - отчет / результат
+    //   name: 'show-source-control-water',
+    //   component: () => import('./components/operational-monitoring/ShowSourceControlWater.vue')
+    // },
     {
       path: '*',
       meta: {
