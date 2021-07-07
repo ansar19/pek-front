@@ -30,12 +30,11 @@
                       {{oml.limitQty}}
                     </td>
                     <td data-label="Ответственное лицо" class="align-middle">
-                      {{oml.responsible.userFullName}}
+                      {{oml.responsible.userFullName}} - {{oml.responsible.poistion}}
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <pre>{{operationalMonitoringList}}</pre>
             </div>
           </div>
           <div class="card-footer">
