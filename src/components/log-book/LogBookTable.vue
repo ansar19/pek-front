@@ -11,11 +11,11 @@
       :pagination-options="paginationOptions"
     >
       <div slot="table-actions">
-        <router-link to="/new-record">
+        <!-- <router-link to="/new-record">
           <button type="button" class="btn btn-outline-primary btn-sm mr-2">
             + Новая запись
           </button>
-        </router-link>
+        </router-link> -->
         <!-- download doc -->
 
         <button

@@ -33,6 +33,10 @@
 
                       <!-- air table -->
                       <h5>3.1. Атмосферный воздух</h5>
+                       <div class="form-group">
+                            <label for="sampling-date">Дата проведения мониторинга:</label>
+                            <input type="date" v-model="samplingDate" class="form-control" name="sampling-date">
+                          </div>
                       <div class="table mt-2">
                         <table class="meta-table">
                           <thead>
