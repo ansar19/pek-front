@@ -5,32 +5,29 @@
         <span class="text-uppercase page-subtitle">Новый операционный мониторинг</span>
       </div>
     </div>
-
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
         <h5>Наименование точек операционного контроля</h5>
       </div>
       <div class="card-body">
         <form @submit.prevent="submitHandler">
-
           <!-- table -->
-
           <div class="table mt-2">
             <table class="meta-table table table-stripped table-bordered">
               <thead>
                 <tr>
-                  <th style="width: 15%;">Источник</th>
-                  <th style="width: 15%;">Контролируемые процессы и параметры</th>
-                  <th style="width: 15%;">Единица измерения</th>
-                  <th style="width: 15%;">Количество по проекту (ПДВ, ОВОС, ПДС)
+                  <th style="width: 15%;" class="align-middle">Источник</th>
+                  <th style="width: 15%;" class="align-middle">Контролируемые процессы и параметры</th>
+                  <th style="width: 15%;" class="align-middle">Единица измерения</th>
+                  <th style="width: 15%;" class="align-middle">Количество по проекту (ПДВ, ОВОС, ПДС)
                     (год)</th>
-                  <th style="width: 25%;">Ответственное лицо за контроль</th>
-                  <th style="width: 5%;"></th>
+                  <th style="width: 25%;" class="align-middle">Ответственное лицо за контроль</th>
+                  <th style="width: 5%;" class="align-middle"></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="oml, index in operationalMonitoringList" :key="index">
-                  <td data-label="Источник" class="align-middle">0001 — Дымовая труба печи ЭЛОУ-АВТ</td>
+                  <td data-label="Источник" class="align-middle">{{oml.source}}</td>
                   <td data-label="Контролируемые процессы и параметры" class="align-middle">
                     <v-select :options="controlledProcessesParameters" label="controlledProcessParameterName"
                       :value="oml.controlledProcessParameter"
@@ -47,14 +44,24 @@
                     <v-select :options="userList" label="userFullName" :value="oml.responsible"
                       @input="responsible => updateResponsible(oml, responsible)" />
                   </td>
-                  <td class="align-middle">Обновить / удалить</td>
+                  <td class="align-middle">
+                    <button class="btn-danger btn-sm btn mr-2" @click.prevent="deleteOperationalMonitoringItem(idx)">
+                      <i class="material-icons">delete</i>
+                    </button>
+                  </td>
                 </tr>
-
+                <tr>
+                  <td colspan="6">
+                    <button class="btn btn-sm btn-outline-primary mb-4 mr-2 "
+                      @click.prevent="addOperationalMonitoringItem">
+                      <i class="material-icons">exposure_plus_1</i>
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
             <pre>{{operationalMonitoringList}}</pre>
           </div>
-
         </form>
       </div>
       <div class="card-footer border-top mb">
@@ -115,6 +122,7 @@ export default {
   data: () => ({
     operationalMonitoringList: [{
         id: 1,
+        source: '0001 — Дымовая труба печи ЭЛОУ-АВТ',
         controlledProcessParameter: {},
         unitOfMeasurement: {},
         limitQty: 0,
@@ -140,6 +148,19 @@ export default {
     },
     updateResponsible(oml, responsible) {
       oml.responsible = responsible
+    },
+    addOperationalMonitoringItem() {
+      this.operationalMonitoringList.push({
+        id: '',
+        source: '',
+        controlledProcessParameter: {},
+        unitOfMeasurement: {},
+        limitQty: 0,
+        responsible: {}
+      })
+    },
+    deleteOperationalMonitoringItem(idx) {
+      this.operationalMonitoringList.splice(idx, 1)
     }
   }
 }
