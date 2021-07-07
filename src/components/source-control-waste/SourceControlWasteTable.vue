@@ -78,28 +78,7 @@ export default {
         },
       ],
       rows: [
-  //       {
-  //   wasteName: "Золошлаки",
-  //   wasteHazardLevel: "15"
-  // },
-  // {
-  //   wasteName: "Вскрышные породы",
-  //   wasteHazardLevel: "19"
-  // },
-  // {
-  //   wasteName: "Хвосты сульфидной флотации",
-  //   wasteHazardLevel: "935"
-  // },
-  // {
-  //   wasteName: "Углеродный продукт",
-  //   wasteHazardLevel: "6"
-  // },
-  // {
-  //   wasteName: "Вмещающая порода",
-  //   wasteHazardLevel: "9"
-  // },
-
-        {
+          {
           id:1,
           name: 'Внешний отвал',
           wasteName: 'Золошлаки',
@@ -158,7 +137,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

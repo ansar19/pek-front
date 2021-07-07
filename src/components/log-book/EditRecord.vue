@@ -123,7 +123,7 @@
                       <!-- water table -->
                       <accordion :init-open="false">
                         <span slot="toggle-text">
-                          <span >3.2. Водные ресурсы</span>
+                          <span>3.2. Водные ресурсы</span>
                         </span>
                         <div slot="content">
                           <div class="form-group">
@@ -277,13 +277,13 @@
                                 <tr v-for="soilControlPoint, index in soilControlPoints" :key="index">
                                   <td data-label="Наименование источников воздействия" class="align-middle">
                                     {{ soilControlPointName }}</td>
-                                  <td data-label="Наименование ЗВ">
+                                  <td data-label="Наименование ЗВ" class="align-middle">
                                     {{ soilControlPoint.soilPollutantName }}
                                   </td>
-                                  <td data-label="Установленный норматив (мг / кг)" class="text-right">
+                                  <td data-label="Установленный норматив (мг / кг)" class="text-right align-middle">
                                     {{ soilControlPoint.soilLimit }}
                                   </td>
-                                  <td data-label="Фактический результат мониторинга (мг / кг)">
+                                  <td data-label="Фактический результат мониторинга (мг / кг)" class="align-middle">
                                     <input type="number" class="form-control"
                                       v-model.number="soilControlPoint.soilActual" />
                                   </td>
@@ -300,9 +300,6 @@
                           </div>
                         </div>
                       </accordion>
-
-
-
 
                       <!-- END soil pollution table -->
 
@@ -432,8 +429,6 @@
                       <!-- END Air impact monitoring -->
 
                       <!-- Water Impact Monitoring -->
-
-
                       <accordion :init-open="false">
                         <span slot="toggle-text">
                           <span>4.2. Водные ресурсы</span>
@@ -503,8 +498,6 @@
                       <!-- END Water Impact Monitoring -->
 
                       <!-- Soil Monitoring -->
-
-
                       <accordion :init-open="false">
                         <span slot="toggle-text">
                           <span>4.3. Почвенный покров</span>
@@ -1005,6 +998,4 @@ table {
     }
   }
 }
-
-
 </style>
