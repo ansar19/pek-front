@@ -29,12 +29,12 @@
       </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
-          <router-link to="/edit-source-control-water">
+          <router-link to="/edit-operational-monitoring">
             <button class="btn-success btn-sm btn mr-2">
               <i class="material-icons">open_in_new</i>
             </button>
           </router-link>
-          <router-link to="/show-source-control-water">
+          <router-link to="/show-operational-monitoring">
             <button class="btn-info btn-sm btn mr-2">
               <i class="material-icons">visibility</i>
             </button>

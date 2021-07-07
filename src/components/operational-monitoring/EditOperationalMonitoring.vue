@@ -2,7 +2,7 @@
   <div class="main-content-container container-fluid px-4">
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <span class="text-uppercase page-subtitle">Новый операционный мониторинг</span>
+        <span class="text-uppercase page-subtitle">Редактирование операционного мониторинга</span>
       </div>
     </div>
     <div class="card card-small mb-4">

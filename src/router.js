@@ -299,21 +299,16 @@ export default new Router({
       name: 'new-operational-monitoring',
       component: () => import('./components/operational-monitoring/NewOperationalMonitoring.vue')
     },
-    // {
-    //   path: '/edit-source-control-water', - редактирование настроики
-    //   name: 'edit-source-control-water',
-    //   component: () => import('./components/operational-monitoring/EditSourceControlWater.vue')
-    // },
-    // {
-    //   path: '/edit-source-control-water', - новая запись ????
-    //   name: 'edit-source-control-water',
-    //   component: () => import('./components/operational-monitoring/EditSourceControlWater.vue')
-    // },
-    // {
-    //   path: '/show-source-control-water', - отчет / результат
-    //   name: 'show-source-control-water',
-    //   component: () => import('./components/operational-monitoring/ShowSourceControlWater.vue')
-    // },
+    {
+      path: '/edit-operational-monitoring', // редактирование настроики
+      name: 'edit-operational-monitoring',
+      component: () => import('./components/operational-monitoring/EditOperationalMonitoring.vue')
+    },
+    {
+      path: '/show-operational-monitoring', // отчет / результат
+      name: 'show-operational-monitoring',
+      component: () => import('./components/operational-monitoring/ShowOperationalMonitoring.vue')
+    },
     {
       path: '*',
       meta: {
