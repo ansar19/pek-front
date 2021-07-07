@@ -43,38 +43,6 @@ export default {
           dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
           dateOutputFormat: "dd-MM-yyyy",
         },
-        // {
-        //   label: 'Название',
-        //   field: 'categoryName',
-        // },
-        // {
-        //   label: 'Уровень опасности',
-        //   field: 'wasteColor'
-        // },
-        // {
-        //   label: 'Вид отхода',
-        //   field: 'wasteType'
-        // },
-        // {
-        //   label: 'Место вывоза',
-        //   field: 'siteName',
-        // },
-        // {
-        //   label: 'Название перевозчика',
-        //   field: 'transporterName',
-        // },
-        // {
-        //   label: 'Название места утилизации',
-        //   field: 'utilizatorName',
-        // },
-        // {
-        //   label: 'РОП?',
-        //   field: 'type',
-        // },
-        // {
-        //   label: 'Тип',
-        //   field: 'typeText',
-        // },
         {
           label: 'Действия',
           field: 'action',

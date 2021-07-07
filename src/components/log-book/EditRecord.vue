@@ -118,7 +118,7 @@
                           </div>
                         </div>
                       </accordion>
-
+                      <!-- END air table -->
 
                       <!-- water table -->
                       <accordion :init-open="false">
@@ -182,11 +182,9 @@
                           </div>
                         </div>
                       </accordion>
-
                       <!-- END water table -->
 
                       <!-- waste table -->
-
                       <accordion :init-open="false">
                         <span slot="toggle-text">
                           <span>3.3. Отходы производства и потребления</span>
@@ -241,12 +239,9 @@
                           </div>
                         </div>
                       </accordion>
-
                       <!-- END waste table -->
 
                       <!-- soil pollution table -->
-
-
                       <accordion :init-open="false">
                         <span slot="toggle-text">
                           <span>3.4. Мониторинг уровня загрязнения земель</span>
@@ -300,11 +295,9 @@
                           </div>
                         </div>
                       </accordion>
-
                       <!-- END soil pollution table -->
 
                       <!-- Radiation Limit table -->
-
                       <accordion :init-open="false">
                         <span slot="toggle-text">
                           <span>3.5. Радиационный мониторинг</span>
@@ -358,7 +351,6 @@
                           </div>
                         </div>
                       </accordion>
-
                       <!-- END Radiation Limit table -->
 
                       <h4>4. Мониторинг воздействия на границе санитарно-защитной зоны</h4>
@@ -425,7 +417,6 @@
                           </div>
                         </div>
                       </accordion>
-
                       <!-- END Air impact monitoring -->
 
                       <!-- Water Impact Monitoring -->
@@ -494,7 +485,6 @@
                           </div>
                         </div>
                       </accordion>
-
                       <!-- END Water Impact Monitoring -->
 
                       <!-- Soil Monitoring -->
@@ -561,8 +551,50 @@
                           </div>
                         </div>
                       </accordion>
-
                       <!-- END Soil monitoring -->
+
+                      <!-- Operational monitoring -->
+                      <h4>Операционный мониторинг</h4>
+                      <accordion :init-open="false">
+                        <span slot="toggle-text">
+                          <span>Операционный контроль</span>
+                        </span>
+                        <div slot="content">
+                          <div class="table mt-2">
+                            <table class="meta-table table table-stripped table-bordered">
+                              <thead>
+                                <tr>
+                                  <th style="width: 20%;">Источник</th>
+                                  <th style="width: 20%;">Контролируемые процессы и параметры, ед. измерения</th>
+                                  <th style="width: 20%;">Количество по проекту (ПДВ, ОВОС, ПДС)
+                                    (год)</th>
+                                  <th style="width: 20%;">Количество по факту на месяц</th>
+                                  <th style="width: 20%;">Остаток</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr v-for="oml, index in operationalMonitoringList" :key="index">
+                                  <td data-label="Источник">{{oml.source}}</td>
+                                  <td data-label="Контролируемые процессы и параметры, ед. измерения">
+                                    {{oml.controlledProcessParameter.controlledProcessParameterName}},
+                                    {{oml.unitOfMeasurement.uomName}}
+                                  </td>
+                                  <td data-label="Количество по проекту">
+                                    {{oml.limitQty}}
+                                  </td>
+                                  <td data-label="Количество по факту на месяц">
+                                    <input type="number" class="form-control" v-model="oml.actualQty" />
+                                  </td>
+                                  <td data-label="Остаток">
+                                    {{ residualSubtotal(oml.limitQty, oml.actualQty) }}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </accordion>
+                      <!-- END Operational monitoring -->
 
                       <!-- Описание / комментарий -->
                       <div class="form-group">
@@ -570,7 +602,6 @@
                           "Комментарий" | localize
                         }}</label>
                         <textarea class="form-control" id="description" v-model="description" rows="3"></textarea>
-
                         <!-- :class="{
                           invalid:
                             $v.description.$dirty && !$v.description.required,
@@ -934,6 +965,44 @@ export default {
         },
       ],
       description: '',
+      operationalMonitoringList: [{
+        "id": 1,
+        "source": "0001 — Дымовая труба печи ЭЛОУ-АВТ",
+        "controlledProcessParameter": {
+          "controlledProcessParameterName": "Расход",
+          "controlledProcessParameter": "consumption"
+        },
+        "unitOfMeasurement": {
+          "uomName": "т/год",
+          "controlledProcessParameter": "tperyear"
+        },
+        "limitQty": "456",
+        actualQty: 0,
+        "responsible": {
+          "userId": "001",
+          "userFullName": "Иванов Иван Иванович",
+          "poistion": "Начальник ДУО"
+        }
+        }, {
+          "id": 2,
+          "source": "0001 — Дымовая труба печи ЭЛОУ-АВТ",
+          "controlledProcessParameter": {
+            "controlledProcessParameterName": "Производительность",
+            "controlledProcessParameter": "productivity"
+          },
+          "unitOfMeasurement": {
+            "uomName": "час/год",
+            "controlledProcessParameter": "hour_year"
+          },
+          "limitQty": "8000",
+          actualQty: 0,
+          "responsible": {
+            "userId": "001",
+            "userFullName": "Иванов Иван Иванович",
+            "poistion": "Начальник ДУО"
+          }
+        }
+    ],
       ru: ru,
       en: en,
     };
@@ -952,6 +1021,9 @@ export default {
     radiationControlSubTotal(radiationControlPoint) {
       return (radiationControlPoint.radiationLimit - radiationControlPoint.radiationActual)
     },
+    residualSubtotal(limitQty, actualQty) {
+      return limitQty - actualQty;
+    }
   },
   computed: {
     sortedItems () {
