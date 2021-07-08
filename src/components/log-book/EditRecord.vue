@@ -13,24 +13,7 @@
                 <d-row>
                   <d-col>
                     <d-form>
-                      <div class="row">
-                        <div class="col-6">
-                          <!-- <div class="form-group">
-                            <label for="sampling-date">Дата проведения мониторинга:</label>
-                            <input type="date" v-model="samplingDate" class="form-control" name="sampling-date">
-                          </div> -->
-                        </div>
-
-                        <div class="col-6">
-                          <!-- <div class="form-group">
-                            <label for="sampling-date">Лаборатория:</label>
-                            <v-select :options="laboratoriesList" label="laboratoryName" v-model="laboratoryName" />
-                          </div> -->
-                        </div>
-                      </div>
-
                       <h4>3. Мониторинг эмиссий</h4>
-
                       <!-- air table -->
                       <accordion :init-open="false">
                         <span slot="toggle-text">
@@ -596,10 +579,49 @@
                       </accordion>
                       <!-- END Operational monitoring -->
 
+                      <!-- Internal control -->
+                      <h4>Внутренние проверки</h4>
+                      <accordion :init-open="false">
+                        <span slot="toggle-text">
+                          <span>Внутренние проверки</span>
+                        </span>
+                        <div slot="content">
+                          <h4>Инспекция</h4>
+                          <div class="form-group">
+                            <label for="inspected-area">Участок проверки</label>
+                            <input type="text" v-model="inspected_area" class="form-control">
+                          </div>
+                          <table class="meta-table table-stripped table-bordered">
+                            <thead>
+                              <tr>
+                                <th style="width: 5;">Категория</th>
+                                <th style="width: 25%;">Описание</th>
+                                <th style="width: 35%;">Ответы
+                                <th style="width: 35;">Комментарий</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="(inspectionResult, index) in inspection_results" :key="index">
+                                <td data-label="Категория"> {{inspectionResult.question.question_category_name}}</td>
+                                <td data-label="Описание">{{ inspectionResult.question.question_title }}</td>
+                                <td data-label="Ответы">
+                                  <v-select :options="response_options" label="response_title"
+                                    :value="inspectionResult.response"
+                                    @input="response => updateInspectionResult(inspectionResult, response)" />
+                                </td>
+                                <td data-label="Комментарий"> <textarea class="form-control"
+                                    v-model="inspectionResult.comment"></textarea></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </accordion>
+                      <!-- END Internal control -->
+
                       <!-- Описание / комментарий -->
                       <div class="form-group">
                         <label for="description">{{
-                          "Комментарий" | localize
+                          "Выводы" | localize
                         }}</label>
                         <textarea class="form-control" id="description" v-model="description" rows="3"></textarea>
                         <!-- :class="{
@@ -635,6 +657,19 @@
 
 <script>
 import accordion from '@/components/common/Accordion.vue'
+const response_options = [{
+    response_title: "Не применимо",
+    response_answer: "not_applicable"
+  },
+  {
+    response_title: "Соответствует",
+    response_answer: "compliance"
+  },
+  {
+    response_title: "Не соотвествует",
+    response_answer: "non_compliance"
+  }
+];
 
 import {
   en,
@@ -666,15 +701,14 @@ export default {
         key: '',
         isAsc: false
       },
-      samplingDate: new Date(),
       laboratoryName: '',
       airEmissionSourceMonitoringDate: new Date(),
       airEmissionSourcesControl: [{
-        id: 1,
-        emissionSourceName: 'Строительные работы',
-        airEmissionSourcesControlMethod: 'instrumental',
-        laboratoryName: {},
-        emissionSourceNumber: '6001',
+          id: 1,
+          emissionSourceName: 'Строительные работы',
+          airEmissionSourcesControlMethod: 'instrumental',
+          laboratoryName: {},
+          emissionSourceNumber: '6001',
           polCode: "0123",
           polName: "Железо (II, III) оксиды (диЖелезо триоксид, Железа оксид) /в пересчете на (274)",
           actual: "0.002445",
@@ -686,7 +720,7 @@ export default {
           emissionSourceName: 'Строительные работы',
           airEmissionSourcesControlMethod: 'calculated',
           laboratoryName: {},
-        emissionSourceNumber: '6001',
+          emissionSourceNumber: '6001',
           polCode: "0143",
           polName: "Марганец и его соединения /в пересчете на марганца (IV) оксид/ (327)",
           actual: "0.0007685",
@@ -698,7 +732,7 @@ export default {
           emissionSourceName: 'Строительные работы',
           airEmissionSourcesControlMethod: 'instrumental',
           laboratoryName: {},
-        emissionSourceNumber: '6001',
+          emissionSourceNumber: '6001',
           polCode: "2902",
           polName: "Взвешенные частицы (116)",
           actual: "0.1411605",
@@ -722,7 +756,7 @@ export default {
           emissionSourceName: 'Строительные работы',
           airEmissionSourcesControlMethod: 'instrumental',
           laboratoryName: {},
-        emissionSourceNumber: '6001',
+          emissionSourceNumber: '6001',
           polCode: "0337",
           polName: "Углерод оксид (Угарный газ) (584)",
           actual: "0.00000045",
@@ -773,7 +807,7 @@ export default {
           wasteSourceLimit: 838.4088,
           wasteSourceActual: 400.3322,
           quantity: 1,
-          wasteSourceActionItem: "",        
+          wasteSourceActionItem: "",
         },
         {
           uid: 2,
@@ -964,7 +998,6 @@ export default {
           soilPollutionControlMeasure: '',
         },
       ],
-      description: '',
       operationalMonitoringList: [{
         "id": 1,
         "source": "0001 — Дымовая труба печи ЭЛОУ-АВТ",
@@ -983,35 +1016,77 @@ export default {
           "userFullName": "Иванов Иван Иванович",
           "poistion": "Начальник ДУО"
         }
-        }, {
-          "id": 2,
-          "source": "0001 — Дымовая труба печи ЭЛОУ-АВТ",
-          "controlledProcessParameter": {
-            "controlledProcessParameterName": "Производительность",
-            "controlledProcessParameter": "productivity"
-          },
-          "unitOfMeasurement": {
-            "uomName": "час/год",
-            "controlledProcessParameter": "hour_year"
-          },
-          "limitQty": "8000",
-          actualQty: 0,
-          "responsible": {
-            "userId": "001",
-            "userFullName": "Иванов Иван Иванович",
-            "poistion": "Начальник ДУО"
-          }
+      }, {
+        "id": 2,
+        "source": "0001 — Дымовая труба печи ЭЛОУ-АВТ",
+        "controlledProcessParameter": {
+          "controlledProcessParameterName": "Производительность",
+          "controlledProcessParameter": "productivity"
+        },
+        "unitOfMeasurement": {
+          "uomName": "час/год",
+          "controlledProcessParameter": "hour_year"
+        },
+        "limitQty": "8000",
+        actualQty: 0,
+        "responsible": {
+          "userId": "001",
+          "userFullName": "Иванов Иван Иванович",
+          "poistion": "Начальник ДУО"
         }
-    ],
+      }],
+      inspected_area: '',
+      inspection_results: [{
+          uid: 1,
+          question: {
+            question_title: 'Отсутствуют следы протечек, проливов, разливов?',
+            question_category: 'spill',
+            question_category_name: 'Разливы, проливы, утечки',
+          },
+          response: {},
+          comment: ''
+        },
+        {
+          uid: 2,
+          question: {
+            question_title: 'Маркировка контейнеров в наличии и не повреждена',
+            question_category: 'waste',
+            question_category_name: 'Отходы',
+          },
+          response: {},
+          comment: ''
+        },
+        {
+          uid: 3,
+          question: {
+            question_title: 'Контейнеры для отходов в хорошем состоянии и не повреждены?',
+            question_category: 'waste',
+            question_category_name: 'Отходы',
+          },
+          response: {},
+          comment: ''
+        },
+        {
+          uid: 4,
+          question: {
+            question_title: 'Наблюдается черный дым от установок / оборудования?',
+            question_category: 'air',
+            question_category_name: 'Воздух',
+          },
+          response: {},
+          comment: ''
+        }
+      ],
+      description: '',
       ru: ru,
       en: en,
     };
   },
   methods: {
-    sortedClass (key) {
+    sortedClass(key) {
       return this.sort.key === key ? `sorted ${this.sort.isAsc ? 'asc' : 'desc' }` : '';
     },
-    sortBy (key) {
+    sortBy(key) {
       this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : false;
       this.sort.key = key;
     },
@@ -1023,11 +1098,14 @@ export default {
     },
     residualSubtotal(limitQty, actualQty) {
       return limitQty - actualQty;
-    }
+    },
+    updateInspectionResult(inspectionResult, response) {
+      inspectionResult.response = response;
+    },
   },
   computed: {
-    sortedItems () {
-      const list = this.airEmissionSourcesControl.slice();  // Because the order of data is not rewritten at the time of sorting
+    sortedItems() {
+      const list = this.airEmissionSourcesControl.slice(); // Because the order of data is not rewritten at the time of sorting
       if (!!this.sort.key) {
         list.sort((a, b) => {
           a = a[this.sort.key]
@@ -1036,10 +1114,11 @@ export default {
           return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1)
         });
       }
-      
+
       return list;
     },
     laboratoriesList: () => laboratoriesList,
+    response_options: () => response_options,
     wasteSourceLimitsoillControlSubTotal() {
       return this.wasteDisposalSites.reduce(
         (acc, item) => acc + (item.wasteSourceLimit * item.quantity),

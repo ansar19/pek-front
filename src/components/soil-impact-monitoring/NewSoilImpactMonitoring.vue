@@ -81,10 +81,10 @@
               </l-map>
             </div>
 
-            <button type="button" class="btn btn-primary mt-2" v-on:click='isOpen = !isOpen'>Open/Close JSON</button>
+            <!-- <button type="button" class="btn btn-primary mt-2" v-on:click='isOpen = !isOpen'>Open/Close JSON</button>
             <span v-show="isOpen">
               <pre>Debug: {{$data}}</pre>
-            </span>
+            </span> -->
           </fieldset>
         </form>
       </div>

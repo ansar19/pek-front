@@ -17,9 +17,9 @@
               <section v-else>
                 <div class="row">
                   <div class="col-lg-12">
-                    <router-link to="/new-record">
+                    <!-- <router-link to="/new-record">
                       <button class="btn-sm btn-primary float-right mb-3">Новая запись</button>
-                    </router-link>
+                    </router-link> -->
                   </div>
                 </div>
 

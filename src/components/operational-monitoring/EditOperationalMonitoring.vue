@@ -60,7 +60,7 @@
                 </tr>
               </tbody>
             </table>
-            <pre>{{operationalMonitoringList}}</pre>
+            <!-- <pre>{{operationalMonitoringList}}</pre> -->
           </div>
         </form>
       </div>
