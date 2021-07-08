@@ -73,7 +73,16 @@
               </div>
               <l-map :zoom="zoom" :center="center" :options="mapOptions" style="height: 80%"
                 @update:center="centerUpdate" @update:zoom="zoomUpdate">
-                <l-tile-layer :url="url" :attribution="attribution" />
+                <l-control-layers position="topright"  ></l-control-layers>
+                <!-- <l-tile-layer :url="url" :attribution="attribution" /> -->
+                <l-tile-layer
+                  v-for="tileProvider in tileProviders"
+                  :key="tileProvider.name"
+                  :name="tileProvider.name"
+                  :visible="tileProvider.visible"
+                  :url="tileProvider.url"
+                  :attribution="tileProvider.attribution"
+                  layer-type="base"/>
                 <l-marker :lat-lng.sync="soilImpactMonitoringCoord" :draggable="true">
                   <l-tooltip :options="{  permanent: true, interactive: true }">{{soilImpactSamplePoint}}
                   </l-tooltip>
@@ -110,7 +119,8 @@ import {
   LMap,
   LTileLayer,
   LMarker,
-  LTooltip
+  LTooltip,
+  LControlLayers
 } from "vue2-leaflet";
 
 let soilPollutantsList = [{
@@ -141,7 +151,8 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    LTooltip
+    LTooltip,
+    LControlLayers
   },
   data() {
     return {
@@ -153,8 +164,8 @@ export default {
       // leaflet data
       zoom: 13,
       center: latLng(49.7130280, 81.5851838),
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      // url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       soilImpactMonitoringCoord: latLng(49.72274303391478, 81.56840791897655),
       currentZoom: 11.5,
       currentCenter: latLng(49.7130280, 81.5851838),
@@ -163,6 +174,22 @@ export default {
         zoomSnap: 0.5,
         draggable: true
       },
+      tileProviders: [
+        {
+          name: 'Основная',
+          visible: true,
+          attribution:
+            '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        },
+        {
+          name: 'Топографическая',
+          visible: false,
+          url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+          attribution:
+            'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+        },
+      ],
       // debug
       isOpen: false // toggle pre json data
     }

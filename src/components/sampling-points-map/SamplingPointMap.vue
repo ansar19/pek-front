@@ -10,8 +10,17 @@
           <div style="height: 550px; width: 100%">
 
             <l-map :zoom="zoom" :center="center">
-              <l-control-layers ref="control"></l-control-layers>
-              <l-tile-layer :url="url" :attribution="attribution" name="Основная" layer-type="base"></l-tile-layer>
+              <!-- <l-control-layers ref="control"></l-control-layers> -->
+              <l-control-layers position="topright"  ></l-control-layers>
+              <!-- <l-tile-layer :url="url" :attribution="attribution" name="Основная" layer-type="base"></l-tile-layer> -->
+              <l-tile-layer
+                v-for="tileProvider in tileProviders"
+                :key="tileProvider.name"
+                :name="tileProvider.name"
+                :visible="tileProvider.visible"
+                :url="tileProvider.url"
+                :attribution="tileProvider.attribution"
+                layer-type="base"/>
               <l-layer-group layer-type="overlay" name="Точки мониторинга почв" :visible="true">
                 <l-marker v-for="marker in soilImpactSamplingPoints" :key="marker.id" :visible="marker.visible"
                   :lat-lng="marker.position">
@@ -97,9 +106,25 @@ export default {
       // leaflet data
       zoom: 12,
       center: L.latLng(49.7130280, 81.5851838),
-      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      // url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       marker: L.latLng(49.7130280, 81.5851838),
+      tileProviders: [
+        {
+          name: 'Основная',
+          visible: true,
+          attribution:
+            '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        },
+        {
+          name: 'Топографическая',
+          visible: false,
+          url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+          attribution:
+            'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+        },
+      ],
       soilImpactSamplingPoints: [{
           id: "m1",
           position: {
