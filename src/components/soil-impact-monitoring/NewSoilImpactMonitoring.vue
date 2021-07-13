@@ -66,6 +66,7 @@
               </table>
             </div>
 
+            <!-- Point coordinates -->
             <div style="height: 350px; width: 100%" class="mt-2">
               <div >
                 <p>Координаты точки, широта: {{ soilImpactMonitoringCoord.lat }}, долгота: {{ soilImpactMonitoringCoord.lng }}</p>
@@ -89,6 +90,7 @@
                 </l-marker>
               </l-map>
             </div>
+            <!-- END Point coordinates -->
 
             <!-- <button type="button" class="btn btn-primary mt-2" v-on:click='isOpen = !isOpen'>Open/Close JSON</button>
             <span v-show="isOpen">

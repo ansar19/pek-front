@@ -65,6 +65,27 @@
                 </tbody>
               </table>
             </div>
+            <!-- Point coordinates -->
+            <div style="height: 350px; width: 100%" class="mt-2">
+              <div>
+                <p>Координаты точки, широта: {{ waterImpactMonitoringCoord.lat }}, долгота:
+                  {{ waterImpactMonitoringCoord.lng }}</p>
+                <!-- <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p> -->
+              </div>
+              <l-map :zoom="zoom" :center="center" :options="mapOptions" style="height: 80%"
+                @update:center="centerUpdate" @update:zoom="zoomUpdate">
+                <l-control-layers position="topright"></l-control-layers>
+                <!-- <l-tile-layer :url="url" :attribution="attribution" /> -->
+                <l-tile-layer v-for="tileProvider in tileProviders" :key="tileProvider.name" :name="tileProvider.name"
+                  :visible="tileProvider.visible" :url="tileProvider.url" :attribution="tileProvider.attribution"
+                  layer-type="base" />
+                <l-marker :lat-lng.sync="waterImpactMonitoringCoord" :draggable="true">
+                  <l-tooltip :options="{  permanent: true, interactive: true }">{{waterImpactSamplePoint}}
+                  </l-tooltip>
+                </l-marker>
+              </l-map>
+            </div>
+            <!-- END Point coordinates -->
             <!-- <button type="button" class="btn btn-primary mt-2" v-on:click='isOpen = !isOpen'>Open/Close JSON</button>
             <span v-show="isOpen">
               <pre>Debug: {{$data}}</pre>
@@ -86,7 +107,17 @@
 </template>
 
 <script>
+import {
+  latLng
+} from "leaflet";
 
+import {
+  LMap,
+  LTileLayer,
+  LMarker,
+  LTooltip,
+  LControlLayers
+} from "vue2-leaflet";
 let waterPollutantsList = [{
     polCode: "0123",
     waterPolName: "Водородный показатель (рН)"
@@ -111,6 +142,13 @@ let waterPollutantsList = [{
 
 export default {
   name: 'edit-water-impact-monitoring',
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LTooltip,
+    LControlLayers
+  },
   data: () => ({
     waterImpactSamplePoint: 'Запруда на ручье Алайгыр ГП5',
     waterImpactsLimitsTable: [{
@@ -142,6 +180,32 @@ export default {
         waterPollutionLimit: 0.0023
       },
     ],
+    // leaflet data
+    zoom: 13,
+    center: latLng(49.7130280, 81.5851838),
+    // url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    waterImpactMonitoringCoord: latLng(49.72274303391478, 81.56840791897655),
+    currentZoom: 11.5,
+    currentCenter: latLng(49.7130280, 81.5851838),
+    showParagraph: false,
+    mapOptions: {
+      zoomSnap: 0.5,
+      draggable: true
+    },
+    tileProviders: [{
+        name: 'Основная',
+        visible: true,
+        attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      },
+      {
+        name: 'Топографическая',
+        visible: false,
+        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+      },
+    ],
     isOpen: false // toggle pre json data
   }),
   computed: {
@@ -157,13 +221,15 @@ export default {
     deleteWaterImpactLimit(idx) {
       this.waterImpactsLimitsTable.splice(idx, 1)
     },
+    zoomUpdate(zoom) {
+      this.currentZoom = zoom;
+    },
+    centerUpdate(center) {
+      this.currentCenter = center;
+    },
     goBack() {
       this.$router.go(-1);
     },
   }
 }
 </script>
-
-<style scoped>
-
-</style>
