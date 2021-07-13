@@ -125,27 +125,7 @@ import {
   LControlLayers
 } from "vue2-leaflet";
 
-let soilPollutantsList = [{
-    polCode: "0123",
-    soilPolName: "Водородный показатель (рН) водной вытяжки"
-  },
-  {
-    polCode: "0143",
-    soilPolName: "Ванадий (вал)"
-  },
-  {
-    polCode: "2902",
-    soilPolName: "Кадмий (вал)"
-  },
-  {
-    polCode: "2754",
-    soilPolName: "Марганец (вал)"
-  },
-  {
-    polCode: "0337",
-    soilPolName: "Медь (вал)"
-  }
-];
+import soilPollutantsList from '@/data/soil-pollutants-list.js';
 
 export default {
   name: 'new-soil-impact-monitoring',

@@ -122,7 +122,6 @@ import {
 
 import waterPolList from '@/data/water-poll-list.js';
 
-
 export default {
   name: 'new-water-impact-monitoring',
   components: {
@@ -191,7 +190,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -7,6 +7,7 @@ import History from './views/History.vue';
 import NewRecord from './components/log-book/NewRecord.vue';
 import EditRecord from './components/log-book/EditRecord.vue';
 import GeneralDetails from './views/GeneralDetails.vue';
+import EmissionPermit from './views/EmissionPermit.vue';
 import Laboratories from './views/Laboratories.vue';
 import AirEmissionSourceControl from './views/AirEmissionSourceControl.vue';
 import SourceControlWater from './views/SourceControlWater.vue';
@@ -105,6 +106,28 @@ export default new Router({
       name: 'edit-general-detail',
       component: () => import( /* webpackChunkName: "" */ './components/generaldetails/EditGeneralDetail.vue')
     },
+
+    {
+      path: '/emission-permits',
+      name: 'emission-permits',
+      component: EmissionPermit
+    },
+    {
+      path: '/new-emission-permit',
+      name: 'new-emission-permit',
+      component: () => import( /* webpackChunkName: "" */ './components/emission-permit/NewEmissionPermit.vue')
+    },
+    {
+      path: '/show-emission-permit',
+      name: 'show-emission-permit',
+      component: () => import( /* webpackChunkName: "" */ './components/emission-permit/ShowEmissionPermit.vue')
+    },
+    {
+      path: '/edit-emission-permit',
+      name: 'edit-emission-permit',
+      component: () => import( /* webpackChunkName: "" */ './components/emission-permit/EditEmissionPermit.vue')
+    },
+
     {
       path: '/laboratories',
       name: 'laboratories',

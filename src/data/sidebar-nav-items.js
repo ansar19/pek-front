@@ -15,7 +15,7 @@ export default function () {
     },
   }, {
     title: 'Журнал',
-    htmlBefore: '<i class="material-icons">sticky_note_2</i>',
+    htmlBefore: '<i class="material-icons">history_edu</i>',
     to: {
       name: 'history',
     },
@@ -24,6 +24,13 @@ export default function () {
     htmlBefore: '<i class="material-icons"> home_work</i>',
     to: {
       name: 'generaldetails',
+    }, 
+  }, 
+  {
+    title: 'Разрешения на эмиссии',
+    htmlBefore: '<i class="material-icons"> summarize</i>',
+    to: {
+      name: 'emission-permits',
     }, 
   }, {
     title: '2. Сведения о лаборатории',

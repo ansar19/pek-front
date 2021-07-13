@@ -54,60 +54,7 @@
 </template>
 
 <script>
-
-const soilPollutantList = [{
-    soilPollutantName: "Азот аммонийный",
-    soilPolCode: "15"
-  },
-  {
-    soilPollutantName: "Азот нитратный",
-    soilPolCode: "19"
-  },
-  {
-    soilPollutantName: "Азот нитритный",
-    soilPolCode: "935"
-  },
-  {
-    soilPollutantName: "Синтетические поверхностно-активные вещества (СПАВ)",
-    soilPolCode: "6"
-  },
-  {
-    soilPollutantName: "Взвешенные вещества",
-    soilPolCode: "1"
-  },
-  {
-    soilPollutantName: "Нефтепродукты",
-    soilPolCode: "5"
-  },
-  {
-    soilPollutantName: "Сульфаты",
-    soilPolCode: "47"
-  },
-  {
-    soilPollutantName: "Фосфор общий",
-    soilPolCode: "33"
-  },
-  {
-    soilPollutantName: "Хлориды",
-    soilPolCode: "52"
-  },
-  {
-    soilPollutantName: "Ксантогенаты",
-    soilPolCode: "5.1.4.3"
-  },
-  {
-    soilPollutantName: "Кремний",
-    soilPolCode: "735"
-  },
-  {
-    soilPollutantName: "Фторид-ионы",
-    soilPolCode: "51"
-  },
-  {
-    soilPollutantName: "Марганец",
-    soilPolCode: "780"
-  }
-];
+import soilPollutantsList from '@/data/soil-pollutants-list.js';
 
 export default {
   name: 'NewSoilMonitoring',
@@ -140,7 +87,7 @@ export default {
     soilControlPointName: "Точка 1",
   }),
   computed: {
-    options: () => soilPollutantList,
+    options: () => soilPollutantsList,
   },
   methods: {
     goBack() {

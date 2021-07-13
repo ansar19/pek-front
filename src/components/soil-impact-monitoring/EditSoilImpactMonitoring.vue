@@ -123,27 +123,7 @@ import {
   LControlLayers
 } from "vue2-leaflet";
 
-let soilPollutantsList = [{
-    polCode: "0123",
-    soilPolName: "Водородный показатель (рН) водной вытяжки"
-  },
-  {
-    polCode: "0143",
-    soilPolName: "Ванадий (вал)"
-  },
-  {
-    polCode: "2902",
-    soilPolName: "Кадмий (вал)"
-  },
-  {
-    polCode: "2754",
-    soilPolName: "Марганец (вал)"
-  },
-  {
-    polCode: "0337",
-    soilPolName: "Медь (вал)"
-  }
-];
+import soilPollutantsList from '@/data/soil-pollutants-list.js';
 
 export default {
   name: 'edit-soil-impact-monitoring',
@@ -158,35 +138,35 @@ export default {
     soilImpactSamplePoint: 'Обобщенная граница СЗЗ предприятия. Площадка № 1',
     soilImpactsLimitsTable: [{
         soilPollutant: {
-          polCode: "0123",
+          soilPolCode: "0123",
           soilPolName: "Водородный показатель (рН) водной вытяжки"
         },
         soilPollutionLimit: 0.23
       },
       {
         soilPollutant: {
-          polCode: "0143",
+          soilPolCode: "0143",
           soilPolName: "Ванадий (вал)"
         },
         soilPollutionLimit: 0.0023
       },
       {
         soilPollutant: {
-          polCode: "0143",
+          soilPolCode: "0143",
           soilPolName: "Кадмий (вал)"
         },
         soilPollutionLimit: 0.0023
       },
       {
         soilPollutant: {
-          polCode: "0143",
+          soilPolCode: "0143",
           soilPolName: "Марганец (вал)"
         },
         soilPollutionLimit: 0.0023
       },
       {
         soilPollutant: {
-          polCode: "0143",
+          soilPolCode: "0143",
           soilPolName: "Медь (вал)"
         },
         soilPollutionLimit: 0.0023
