@@ -11,7 +11,7 @@
       :pagination-options="paginationOptions"
     >
       <div slot="table-actions">
-        <router-link to="/new-gram-per-second-limit">
+        <router-link to="/new-air-emission-source-control">
           <button type="button" class="btn btn-outline-primary btn-sm mr-2">
             + Новый лимит на источнике
           </button>
@@ -29,12 +29,12 @@
       </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
-          <router-link to="/edit-gram-per-second-limit">
+          <router-link to="/edit-air-emission-source-control">
             <button class="btn-success btn-sm btn mr-2">
               <i class="material-icons">open_in_new</i>
             </button>
           </router-link>
-          <router-link to="/show-gram-per-second-limit">
+          <router-link to="/show-air-emission-source-control">
             <button class="btn-info btn-sm btn mr-2">
               <i class="material-icons">visibility</i>
             </button>

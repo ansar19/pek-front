@@ -15,21 +15,20 @@
                   <th>Код загрязняющих веществ</th>
                   <th>Наименование загрязняющих веществ</th>
                   <th>Установленный норматив (грамм в секунду; тонна в год)</th>
-
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(gSecL, index) in gramPerSecondLimit" :key="index">
                   <td>{{index+1}}</td>
-                  <td data-label="Наименование источника">{{(gSecL.emissionSourceName)}}</td>
-                  <td data-label="Код источника">{{ gSecL.emissionSourceCode }}</td>
+                  <td data-label="Наименование источника">{{(gSecL.airEmissionSourceName)}}</td>
+                  <td data-label="Код источника">{{ gSecL.airEmissionSourceCode }}</td>
                   <td data-label="Код загрязняющих веществ">
                     {{ gSecL.polCode }}
                   </td>
                   <td data-label="Наименование загрязняющих веществ">
                     {{ gSecL.polName }}
                   </td>
-                  <td data-label="Установленный норматив (г/сек; т/год)">{{ gSecL.gSecLimit }}</td>
+                  <td data-label="Установленный норматив (г/сек; т/год)">{{ gSecL.airEmissionSourceLimit }}</td>
                 </tr>
               </tbody>
             </table>
@@ -53,39 +52,39 @@ export default {
     return {
       gramPerSecondLimit: [
         {
-        emissionSourceName: "Строительные работы",
-        emissionSourceCode: "6001",
+        airEmissionSourceName: "Строительные работы",
+        airEmissionSourceCode: "6001",
         polCode: "0123",
         polName: "Железо (II, III) оксиды (диЖелезо триоксид, Железа оксид) /в пересчете на (274)",
-        gSecLimit: 0.235
+        airEmissionSourceLimit: 0.232
       },
       {
-        emissionSourceName: "Строительные работы",
-        emissionSourceCode: "6001",
+        airEmissionSourceName: "Строительные работы",
+        airEmissionSourceCode: "6001",
         polCode: "0143",
         polName: "Марганец и его соединения /в пересчете на марганца (IV) оксид/ (327)",
-        gSecLimit: 0.235
+        airEmissionSourceLimit: 0.0247
       },
       {
-        emissionSourceName: "Строительные работы",
-        emissionSourceCode: "6001",
+        airEmissionSourceName: "Строительные работы",
+        airEmissionSourceCode: "6001",
         polCode: "2902",
         polName: "Взвешенные частицы (116)",
-        gSecLimit: 0.235
+        airEmissionSourceLimit: 0.001147
       },
       {
-        emissionSourceName: "Строительные работы",
-        emissionSourceCode: "6001",
+        airEmissionSourceName: "Строительные работы",
+        airEmissionSourceCode: "6001",
         polCode: "2754",
         polName: "Алканы С12-19 (Углеводороды предельные С12-19)",
-        gSecLimit: 0.235
+        airEmissionSourceLimit: 0.0012
       },
       {
-        emissionSourceName: "Строительные работы",
-        emissionSourceCode: "6001",
+        airEmissionSourceName: "Строительные работы",
+        airEmissionSourceCode: "6001",
         polCode: "0337",
         polName: "Углерод оксид (Угарный газ) (584)",
-        gSecLimit: 0.235
+        airEmissionSourceLimit: 0.00478
       }
       ],
     };

@@ -8,7 +8,7 @@ import NewRecord from './components/log-book/NewRecord.vue';
 import EditRecord from './components/log-book/EditRecord.vue';
 import GeneralDetails from './views/GeneralDetails.vue';
 import Laboratories from './views/Laboratories.vue';
-import GramsPerSecondLimits from './views/GramsPerSecondLimits.vue';
+import AirEmissionSourceControl from './views/AirEmissionSourceControl.vue';
 import SourceControlWater from './views/SourceControlWater.vue';
 import SourceControlWaste from './views/SourceControlWaste.vue';
 import SoilMonitoring from './views/SoilMonitoring.vue';
@@ -126,24 +126,24 @@ export default new Router({
       component: () => import('./components/laboratory/EditLaboratory.vue')
     },
     {
-      path: '/grams-per-second-limits',
-      name: 'grams-per-second-limits',
-      component: GramsPerSecondLimits,
+      path: '/air-emission-source-control',
+      name: 'air-emission-source-control',
+      component: AirEmissionSourceControl,
     },
     {
-      path: '/new-gram-per-second-limit',
-      name: 'new-gram-per-second-limit',
-      component: () => import('./components/grampersecondlimit/NewGramPerSecondLimit.vue')
+      path: '/new-air-emission-source-control',
+      name: 'new-air-emission-source-control',
+      component: () => import('./components/air-emission-source-control/NewAirEmissionSourceControl.vue')
     },
     {
-      path: '/show-gram-per-second-limit',
-      name: 'show-gram-per-second-limit',
-      component: () => import('./components/grampersecondlimit/ShowGramPerSecondLimit.vue')
+      path: '/show-air-emission-source-control',
+      name: 'show-air-emission-source-control',
+      component: () => import('./components/air-emission-source-control/ShowAirEmissionSourceControl.vue')
     },
     {
-      path: '/edit-gram-per-second-limit',
-      name: 'edit-gram-per-second-limit',
-      component: () => import('./components/grampersecondlimit/EditGramPerSecondLimit.vue')
+      path: '/edit-air-emission-source-control',
+      name: 'edit-air-emission-source-control',
+      component: () => import('./components/air-emission-source-control/EditAirEmissionSourceControl.vue')
     },
     {
       path: '/source-control-water',

@@ -35,7 +35,7 @@ export default function () {
     title: '3.1. Атмосферный воздух',
     htmlBefore: '<i class="material-icons">fireplace</i>',
     to: {
-      name: 'grams-per-second-limits',
+      name: 'air-emission-source-control',
     },
   },
   {

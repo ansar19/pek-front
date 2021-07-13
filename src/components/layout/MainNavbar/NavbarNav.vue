@@ -52,11 +52,11 @@
           </router-link>
         </d-dropdown-item>
         <d-dropdown-item
-          ><i class="material-icons">&#xE8B8;</i> Edit Profile</d-dropdown-item
+          ><i class="material-icons">&#xE8B8;</i> Редактировать</d-dropdown-item
         >
         <d-dropdown-divider />
         <d-dropdown-item href="#" class="text-danger">
-          <i class="material-icons text-danger">&#xE879;</i> Logout
+          <i class="material-icons text-danger">&#xE879;</i> Выйти
         </d-dropdown-item>
       </d-collapse>
     </li>

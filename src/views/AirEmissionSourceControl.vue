@@ -11,7 +11,7 @@
       <div class="col">
         <div class="card card-small mb-4">
           <div class="card-body">
-            <GramsPerSecondLimitsTable :rows="rows" />
+            <AirEmissionSourceControlTable :rows="rows" />
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
 /* eslint-disable */
 import '@/assets/scss/vue-tables.scss';
 
-import GramsPerSecondLimitsTable from '@/components/grampersecondlimit/GramsPerSecondLimitsTable';
+import AirEmissionSourceControlTable from '@/components/air-emission-source-control/AirEmissionSourceControlTable';
 
 export default {
   data() {
@@ -77,7 +77,7 @@ export default {
     };
   },
   components: {
-    GramsPerSecondLimitsTable,
+    AirEmissionSourceControlTable,
   },
 };
 </script>

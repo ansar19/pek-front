@@ -91,6 +91,7 @@
               <pre>Debug: {{$data}}</pre>
             </span> -->
           </fieldset>
+          
         </form>
       </div>
       <div class="card-footer border-top mb">
