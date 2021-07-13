@@ -14,26 +14,8 @@
 
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <!--   Разрешение на эмиссии  - год зв, дата начала и конца разрешения       -->
-                    <!--     Источники выбросов подлежащие контролю - номер и название        -->
-                    <!--        ЗВ подлежащий учету - код и название + лимит    -->
-                    <!--      Dependant select - очистить список ЗВ если выбрали новый источник  -->
                     <label for="emission-permit-name">№ и Название разрешения на эмиссии:</label>
-                    <textarea rows="2" v-model="emissionPermitName" class="form-control"
-                      name="emission-permit-name"></textarea>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="emission-permit-issue-date">Дата выдачи разрешения на эмиссию:</label>
-                    <input type="date" v-model="emissionPermitIssueDate" class="form-control"
-                      name="emission-permit-issue-date">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="emission-permit-due-date">Дата истечения разрешения на эмиссию:</label>
-                    <input type="date" v-model="emissionPermitDueDate" class="form-control"
-                      name="emission-permit-due-date">
+                    <v-select :options="emissionPermitLists" label="emissionPermitName" v-model="emissionPermit" />
                   </div>
                 </div>
 
@@ -119,13 +101,13 @@
 import airPollutantsList from '@/data/air-pollutants-list.js';
 import airEmissionSourcesList from '@/data/air-emission-sources-list.js';
 import controlPeriodicityList from '@/data/control-periodicity-list.js';
+import emissionPermitLists from '@/data/emission-permits-list';
 
 export default {
+  name: "new-air-emission-source-control",
   data: () => ({
-    emissionPermitName: "№: KZ28VDD00145762 (Строительство здания Общежития No5 на 96 мест Вахтового поселка)",
-    emissionPermitIssueDate: new Date(),
-    emissionPermitDueDate: new Date(),
-    selectedAirEmissionSource: "", // необходимо отображать список только тех источников по которым еще не установлены лимиты
+    emissionPermit: {},
+    selectedAirEmissionSource: {}, // необходимо отображать список только тех источников по которым еще не установлены лимиты
     airEmissionSourcesControl: [],
     // title: '',
     // utilizatorPhone: '',
@@ -142,6 +124,7 @@ export default {
     airPollutantsList: () => airPollutantsList,
     airEmissionSourcesList: () => airEmissionSourcesList,
     controlPeriodicityList: () => controlPeriodicityList,
+    emissionPermitLists: () => emissionPermitLists,
   },
   methods: {
     save(event) {

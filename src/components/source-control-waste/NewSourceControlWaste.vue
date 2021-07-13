@@ -2,7 +2,7 @@
   <div class="main-content-container container-fluid px-4">
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <span class="text-uppercase page-subtitle">Новый лимит эмиссии</span>
+        <span class="text-uppercase page-subtitle">Новый лимит</span>
       </div>
     </div>
 
@@ -16,20 +16,7 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="emission-permit-name">№ и Название разрешения на эмиссии:</label>
-              <textarea rows="2" v-model="emissionPermitName" class="form-control"
-                name="emission-permit-name"></textarea>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="emission-permit-issue-date">Дата выдачи разрешения на эмиссию:</label>
-              <input type="date" v-model="emissionPermitIssueDate" class="form-control"
-                name="emission-permit-issue-date">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="emission-permit-due-date">Дата истечения разрешения на эмиссию:</label>
-              <input type="date" v-model="emissionPermitDueDate" class="form-control" name="emission-permit-due-date">
+                <v-select :options="emissionPermitLists" label="emissionPermitName" v-model="emissionPermit" />
             </div>
           </div>
 
@@ -65,6 +52,7 @@
           </div>
         </form>
       </div>
+      <!-- <pre>{{$data}}</pre> -->
       <div class="card-footer border-top mb">
         <button class="btn btn-primary waves-effect waves-light mb-4 mr-2" @click="goBack" type="submit">
           Назад
@@ -102,8 +90,13 @@ const wasteList = [
   },
 ];
 
+import emissionPermitLists from '@/data/emission-permits-list';
+
+
 export default {
   data: () => ({
+    emissionPermit: {
+    },
     releaseSources: [
       {
         uid: 1,
@@ -134,6 +127,7 @@ export default {
   }),
   computed: {
     options: () => wasteList,
+    emissionPermitLists: () => emissionPermitLists,
     total() {
       return this.releaseSources.reduce(
         (acc, item) => acc + (item.wasteSourceLimit * item.quantity),

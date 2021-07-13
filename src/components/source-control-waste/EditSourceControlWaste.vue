@@ -2,7 +2,7 @@
   <div class="main-content-container container-fluid px-4">
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <span class="text-uppercase page-subtitle">Новый лимит эмиссии</span>
+        <span class="text-uppercase page-subtitle">Редактировать лимит</span>
       </div>
     </div>
 
@@ -16,20 +16,7 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="emission-permit-name">№ и Название разрешения на эмиссии:</label>
-              <textarea rows="2" v-model="emissionPermitName" class="form-control"
-                name="emission-permit-name"></textarea>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="emission-permit-issue-date">Дата выдачи разрешения на эмиссию:</label>
-              <input type="date" v-model="emissionPermitIssueDate" class="form-control"
-                name="emission-permit-issue-date">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="emission-permit-due-date">Дата истечения разрешения на эмиссию:</label>
-              <input type="date" v-model="emissionPermitDueDate" class="form-control" name="emission-permit-due-date">
+                <v-select :options="emissionPermitLists" label="emissionPermitName" v-model="emissionPermit" />
             </div>
           </div>
 
@@ -84,6 +71,8 @@
 </template>
 
 <script>
+import emissionPermitLists from '@/data/emission-permits-list';
+
 const wasteList = [
   {
     wasteName: "Золошлаки",
@@ -109,7 +98,13 @@ const wasteList = [
 
 export default {
   data: () => ({
-    emissionPermitName: "по Комплексному разрешению№: KZ22VCZ00510312 от 20.11.2019г. Действует с 1 декабря 2019 г.",
+    emissionPermit: {
+      "id": 1,
+      "emissionPermitName": "Строительство здания Общежития No5 на 96 мест Вахтового поселка",
+      "emissionPermitNumber": "KZ28VDD00145762",
+      "emissionPermitStartDate": "2021-01-01",
+      "emissionPermitDueDate": "2021-12-31"
+    },
     wasteDisposalSites: [
       {
         uid: 1,
@@ -139,6 +134,8 @@ export default {
     wasteEmissionSourceName: "Внешний отвал",
   }),
   computed: {
+    emissionPermitLists: () => emissionPermitLists,
+
     options: () => wasteList,
     wasteSourceLimitSubTotal() {
       return this.wasteDisposalSites.reduce(

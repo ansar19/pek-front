@@ -14,26 +14,8 @@
 
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <!--   Разрешение на эмиссии  - год зв, дата начала и конца разрешения       -->
-                    <!--     Источники выбросов подлежащие контролю - номер и название        -->
-                    <!--        ЗВ подлежащий учету - код и название + лимит    -->
-                    <!--      Dependant select - очистить список ЗВ если выбрали новый источник  -->
                     <label for="emission-permit-name">№ и Название разрешения на эмиссии:</label>
-                    <textarea rows="2" v-model="emissionPermitName" class="form-control"
-                      name="emission-permit-name"></textarea>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="emission-permit-issue-date">Дата выдачи разрешения на эмиссию:</label>
-                    <input type="date" v-model="emissionPermitIssueDate" class="form-control"
-                      name="emission-permit-issue-date">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="emission-permit-due-date">Дата истечения разрешения на эмиссию:</label>
-                    <input type="date" v-model="emissionPermitDueDate" class="form-control"
-                      name="emission-permit-due-date">
+                    <v-select :options="emissionPermitLists" label="emissionPermitName" v-model="emissionPermit" />
                   </div>
                 </div>
 
@@ -101,6 +83,7 @@
                 <!-- END Limits Table -->
               </form>
             </div>
+
           </div>
           <div class="card-footer border-top mb">
             <button class="btn btn-success waves-effect waves-light mb-3" type="submit" @click.prevent="save">
@@ -119,13 +102,19 @@
 import airPollutantsList from '@/data/air-pollutants-list.js';
 import airEmissionSourcesList from '@/data/air-emission-sources-list.js';
 import controlPeriodicityList from '@/data/control-periodicity-list.js';
+import emissionPermitLists from '@/data/emission-permits-list';
+
 
 export default {
   props: {},
   data: () => ({
-    emissionPermitName: "№: KZ28VDD00145762 (Строительство здания Общежития No5 на 96 мест Вахтового поселка)",
-    emissionPermitIssueDate: '2021-01-01',
-    emissionPermitDueDate: '2021-12-31',
+    emissionPermit: {
+      "id": 1,
+      "emissionPermitName": "Строительство здания Общежития No5 на 96 мест Вахтового поселка",
+      "emissionPermitNumber": "KZ28VDD00145762",
+      "emissionPermitStartDate": "2021-01-01",
+      "emissionPermitDueDate": "2021-12-31"
+    },
     selectedAirEmissionSource: [{
       airEmissionSourceName: "Строительные работы",
       airEmissionSourceCode: "6001"
@@ -187,16 +176,15 @@ export default {
       }
     ],
   }),
-  validations: {
-  },
-  watch: {
-  },
-  created() {
-  },
+  validations: {},
+  watch: {},
+  created() {},
   computed: {
     airPollutantsList: () => airPollutantsList,
     airEmissionSourcesList: () => airEmissionSourcesList,
     controlPeriodicityList: () => controlPeriodicityList,
+    emissionPermitLists: () => emissionPermitLists,
+
   },
   methods: {
     addAirEmissionSourceLimit() {
@@ -208,6 +196,9 @@ export default {
     },
     deleteAirEmissionSourceLimit(n) {
       this.airEmissionSourcesControl.splice(n, 1)
+    },
+    save(event) {
+      alert(JSON.stringify(this.$data))
     },
     // async submitHandler() {
     //   if (this.$v.$invalid) {
