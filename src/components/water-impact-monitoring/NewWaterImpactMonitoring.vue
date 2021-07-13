@@ -120,27 +120,8 @@ import {
   LControlLayers
 } from "vue2-leaflet";
 
-let waterPollutantsList = [{
-    polCode: "0123",
-    waterPolName: "Водородный показатель (рН)"
-  },
-  {
-    polCode: "0143",
-    waterPolName: "Температура"
-  },
-  {
-    polCode: "2902",
-    waterPolName: "Азот аммонийный"
-  },
-  {
-    polCode: "2754",
-    waterPolName: "Биологическое потребление кислорода (БПК п)"
-  },
-  {
-    polCode: "0337",
-    waterPolName: "Азот нитратный"
-  }
-];
+import waterPolList from '@/data/water-poll-list.js';
+
 
 export default {
   name: 'new-water-impact-monitoring',
@@ -186,7 +167,7 @@ export default {
     isOpen: false // toggle pre json data
   }),
   computed: {
-    options: () => waterPollutantsList,
+    options: () => waterPolList,
   },
   methods: {
     addWaterImpactLimit() {

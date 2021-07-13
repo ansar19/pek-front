@@ -43,7 +43,7 @@
                   <tr v-for="(f,n) in waterImpactsLimitsTable" :key="n">
                     <td><label :for="'pollutant'+n">{{n+1}}</label></td>
                     <td data-label="Наименование загрязняющих веществ">
-                      <v-select :id="'pollutant'+n" :options="waterPollutantsList" label="waterPolName"
+                      <v-select :id="'pollutant'+n" :options="waterPolList" label="waterPolName"
                         v-model="waterImpactsLimitsTable[n].waterPollutant" />
                     </td>
                     <td data-label="Норма ПДК (макс. разовых, мг/м3)">
@@ -118,27 +118,7 @@ import {
   LTooltip,
   LControlLayers
 } from "vue2-leaflet";
-let waterPollutantsList = [{
-    polCode: "0123",
-    waterPolName: "Водородный показатель (рН)"
-  },
-  {
-    polCode: "0143",
-    waterPolName: "Температура"
-  },
-  {
-    polCode: "2902",
-    waterPolName: "Азот аммонийный"
-  },
-  {
-    polCode: "2754",
-    waterPolName: "Биологическое потребление кислорода (БПК п)"
-  },
-  {
-    polCode: "0337",
-    waterPolName: "Азот нитратный"
-  }
-];
+import waterPolList from '@/data/water-poll-list.js';
 
 export default {
   name: 'edit-water-impact-monitoring',
@@ -153,28 +133,28 @@ export default {
     waterImpactSamplePoint: 'Запруда на ручье Алайгыр ГП5',
     waterImpactsLimitsTable: [{
         waterPollutant: {
-          polCode: "0123",
+          waterPolCode: "0123",
           waterPolName: "Водородный показатель (рН)"
         },
         waterPollutionLimit: 0.23
       },
       {
         waterPollutant: {
-          polCode: "0143",
+          waterPolCode: "0143",
           waterPolName: "Температура"
         },
         waterPollutionLimit: 0.0023
       },
       {
         waterPollutant: {
-          polCode: "0143",
+          waterPolCode: "0143",
           waterPolName: "Азот аммонийный"
         },
         waterPollutionLimit: 0.0023
       },
       {
         waterPollutant: {
-          polCode: "0143",
+          waterPolCode: "0143",
           waterPolName: "Биологическое потребление кислорода (БПК п)"
         },
         waterPollutionLimit: 0.0023
@@ -209,7 +189,7 @@ export default {
     isOpen: false // toggle pre json data
   }),
   computed: {
-    waterPollutantsList: () => waterPollutantsList,
+    waterPolList: () => waterPolList,
   },
   methods: {
     addWaterImpactLimit() {
