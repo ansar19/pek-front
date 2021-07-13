@@ -106,7 +106,7 @@ export default {
         },
         {
           id: 7,
-          full_user_name: 'Нурсултан Назарбаев',
+          full_user_name: 'Нурсултан Койшыбаев',
           createdAt: '2013-09-21',
         },
       ],

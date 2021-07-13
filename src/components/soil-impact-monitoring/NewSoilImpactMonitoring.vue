@@ -66,8 +66,8 @@
               </table>
             </div>
 
-            <div style="height: 350px; width: 100%">
-              <div>
+            <div style="height: 350px; width: 100%" class="mt-2">
+              <div >
                 <p>Координаты точки, широта: {{ soilImpactMonitoringCoord.lat }}, долгота: {{ soilImpactMonitoringCoord.lng }}</p>
                 <!-- <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p> -->
               </div>
@@ -219,7 +219,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
