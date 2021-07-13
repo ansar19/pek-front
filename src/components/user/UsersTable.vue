@@ -54,7 +54,7 @@ export default {
       columns: [
         {
           label: 'Имя',
-          field: 'name',
+          field: 'full_user_name',
           tdClass: 'text-center',
           thClass: 'text-center',
         },
@@ -76,37 +76,37 @@ export default {
       rows: [
         {
           id: 1,
-          name: 'Иван Иванов',
+          full_user_name: 'Иван Иванов',
           createdAt: '2011-10-22',
         },
         {
           id: 2,
-          name: 'Андрей Богданчиков',
+          full_user_name: 'Андрей Богданчиков',
           createdAt: '2011-10-31',
         },
         {
           id: 3,
-          name: 'Алексей Кавокин',
+          full_user_name: 'Алексей Кавокин',
           createdAt: '2011-10-30',
         },
         {
           id: 4,
-          name: 'Кристофер Мур',
+          full_user_name: 'Кристофер Мур',
           createdAt: '2011-10-11',
         },
         {
           id: 5,
-          name: 'Александр Иванов',
+          full_user_name: 'Александр Иванов',
           createdAt: '2011-10-21',
         },
         {
           id: 6,
-          name: 'Константин Латута',
+          full_user_name: 'Константин Латута',
           createdAt: '2011-10-31',
         },
         {
           id: 7,
-          name: 'Нурсултан Назарбаев',
+          full_user_name: 'Нурсултан Назарбаев',
           createdAt: '2013-09-21',
         },
       ],

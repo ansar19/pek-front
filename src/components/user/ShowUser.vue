@@ -14,7 +14,7 @@
             >
               <tr>
                 <th class="text-left">Имя пользователя:</th>
-                <td>{{ u.userName }}</td>
+                <td>{{ u.full_user_name }}</td>
               </tr>
               <tr>
                 <th class="text-left">Зарегистрирован:</th>
@@ -40,7 +40,7 @@ export default {
     return {
       users: [
         {
-          userName: 'Иван Иванов',
+          full_user_name: 'Иван Иванов',
           createdAt: '2011-01-01',
         },
       ],
