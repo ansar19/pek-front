@@ -50,7 +50,7 @@
         <button type="button" class="btn btn-primary mt-2" @click="showLongText">Show/Hide</button>
       </div>
       <div class="card-footer">
-        <table class="table table-bordered" v-show="showAdditionalDetails">
+        <table class="meta-table" v-show="showAdditionalDetails">
           <thead class="thead-light">
             <th style="width:5%">Наименование </th>
             <th style="width:5%">Долгота </th>
@@ -59,10 +59,10 @@
           </thead>
           <tbody>
             <tr v-for="marker in airImpactSamplingPoints" :key="marker.id">
-              <td>{{marker.airImpactSamplePoint}}</td>
-              <td> {{marker.position.lat}} </td>
-              <td> {{marker.position.lng}} </td>
-              <td>
+              <td data-label="Наименование">{{marker.airImpactSamplePoint}}</td>
+              <td data-label="Долгота"> {{marker.position.lat}} </td>
+              <td data-label="Широта"> {{marker.position.lng}} </td>
+              <td data-label="Комментарий">
                 {{marker.comment}}
               </td>
             </tr>
