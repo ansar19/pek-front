@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import FilteredTable from '@/components/history/FilteredTable'
+import FilteredTable from '@/components/log-book/FilteredTable'
 
 export default {
   name: 'history',
