@@ -132,13 +132,13 @@
                               <td data-label="Наименование загрязняющих веществ" class="align-middle">
                                 {{ waterEmissionSource.waterLimitPolName }}
                               </td>
-                              <td data-label="Установленный норматив (миллиграмм на дециметр кубический; тонн в год)"
+                              <td data-label="Установленный норматив (мг/дм3; тонн в год)"
                                 class="text-right align-middle">
                                 {{ waterEmissionSource.waterSourceLimit }}
 
                               </td>
                               <td
-                                data-label="Фактический результат мониторинга, (миллиграмм на дециметр кубический; тонн в квартал; тонн в год)"
+                                data-label="Фактический результат мониторинга, (мг/дм3; тонн в квартал; тонн в год)"
                                 class="align-middle">
                                 <input type="number" class="form-control"
                                   v-model="waterEmissionSource.waterSourceActual" />

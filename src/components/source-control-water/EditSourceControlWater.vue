@@ -25,7 +25,7 @@
               <tr>
                 <th style="width: 40%;">Наименование источников воздействия (контрольные точки)</th>
                 <th style="width: 40%;">Наименование загрязняющих веществ</th>
-                <th style="width: 20%;">Установленный норматив (миллиграмм на дециметр кубический; тонн в год)</th>
+                <th style="width: 20%;">Установленный норматив (мг/дм3; тонн в год)</th>
               </tr>
               <tr v-for="waterEmissionSource, index in waterEmissionSourcesControl" :key="index">
                 <td>{{ waterEmissionSourceName }}</td>
