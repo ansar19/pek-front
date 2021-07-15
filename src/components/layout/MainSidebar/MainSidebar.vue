@@ -107,9 +107,7 @@ export default {
     padding: 1px 1.5625rem;
     font-weight: 500;
     color: #9ea8b9;
+    border-top: 1px solid #e1e5eb;
     border-bottom: 1px solid #e1e5eb;
 }
 </style>
-
-
-
