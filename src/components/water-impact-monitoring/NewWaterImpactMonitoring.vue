@@ -50,7 +50,7 @@
                       <input class="form-control" :id="'pollutant-limit'+n"
                         v-model.number="waterImpactsLimitsTable[n].waterPollutionLimit" type="number"></td>
                     <td>
-                      <button class="btn  btn-sm btn-danger" @click.prevent="deleteWaterImpactLimit(idx)">
+                      <button class="btn  btn-sm btn-danger" @click.prevent="deleteWaterImpactLimit(n)">
                         <i class="material-icons">delete</i>
                       </button>
                     </td>
@@ -95,10 +95,10 @@
         </form>
       </div>
       <div class="card-footer border-top mb">
-        <button class="btn btn-primary waves-effect waves-light mb-4 mr-2" @click="goBack" type="submit">
+        <button class="btn btn-primary  mb-4 mr-2" @click="goBack" type="submit">
           Назад
         </button>
-        <button class="btn btn-success waves-effect waves-light mb-4" type="submit">
+        <button class="btn btn-success  mb-4" type="submit">
           Создать
           <i class="material-icons right">send</i>
         </button>
@@ -175,8 +175,8 @@ export default {
         waterPollutionLimit: '',
       })
     },
-    deleteWaterImpactLimit(idx) {
-      this.waterImpactsLimitsTable.splice(idx, 1)
+    deleteWaterImpactLimit(n) {
+      this.waterImpactsLimitsTable.splice(n, 1)
     },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;

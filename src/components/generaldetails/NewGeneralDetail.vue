@@ -37,7 +37,7 @@
                   <!-- <button type="button" class="btn btn-primary" @click.prevent="addAnother">Добавить</button>
                   <button type="button" class="btn btn-secondary" @click.prevent="clearAllFields">Очистить поля</button>
                   <button type="button" class="btn btn-danger" @click.prevent="deleteArray">Удалить все</button> -->
-                  <button class="btn btn-success waves-effect waves-light mb-3" type="submit">
+                  <button class="btn btn-success  mb-3" type="submit">
                     Создать
                     <i class="material-icons right">send</i>
                   </button>
