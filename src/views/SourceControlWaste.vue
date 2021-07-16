@@ -17,8 +17,6 @@
   </div>
 </template>
 
-
-
 <script>
 import SourceControlWasteTable from '@/components/source-control-waste/SourceControlWasteTable';
 export default {
@@ -26,7 +24,3 @@ name: "source-control-waste",
   components: { SourceControlWasteTable }
 }
 </script>
-
-<style scoped>
-
-</style>

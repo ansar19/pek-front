@@ -20,7 +20,7 @@
 
           <!-- Water Limit table -->
           <div class="table mt-2">
-            
+
             <table class="meta-table table table-stripped table-bordered">
               <tr>
                 <th style="width: 40%;">Наименование источников воздействия (контрольные точки)</th>

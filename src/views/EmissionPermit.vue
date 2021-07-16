@@ -17,8 +17,6 @@
   </div>
 </template>
 
-
-
 <script>
 import EmissionPermitsTable from '@/components/emission-permit/EmissionPermitsTable';
 export default {

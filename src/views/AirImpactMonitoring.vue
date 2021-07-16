@@ -17,8 +17,6 @@
   </div>
 </template>
 
-
-
 <script>
 import AirImpactMonitoringTable from '@/components/air-impact-monitoring/AirImpactMonitoringTable';
 export default {
@@ -28,7 +26,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

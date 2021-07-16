@@ -18,8 +18,6 @@
   </div>
 </template>
 
-
-
 <script>
 import SoilMonitoringTable from '@/components/soil-monitoring/SoilMonitoringTable';
 export default {
@@ -29,7 +27,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

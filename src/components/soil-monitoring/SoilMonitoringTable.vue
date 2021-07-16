@@ -3,7 +3,7 @@
 
     <h3 id="z90"> 3.4. Мониторинг уровня загрязнения земель</h3>
 
-  <!-- <table class="table table-responsive">
+    <!-- <table class="table table-responsive">
     <tr>
       <th>
         <p align="center">
@@ -45,17 +45,11 @@
       </td>
     </tr>
   </table> -->
-  
-    <vue-good-table
-      :columns="columns"
-      :rows="rows"
-      styleClass="vgt-table condensed striped"
-      :search-options="{
+
+    <vue-good-table :columns="columns" :rows="rows" styleClass="vgt-table condensed striped" :search-options="{
         enabled: true,
         placeholder: 'Введите текст для поиска',
-      }"
-      :pagination-options="paginationOptions"
-    >
+      }" :pagination-options="paginationOptions">
       <div slot="table-actions">
         <router-link to="/new-soil-monitoring">
           <button type="button" class="btn btn-outline-primary btn-sm mr-2">
@@ -64,10 +58,7 @@
         </router-link>
         <!-- download doc -->
 
-        <button
-          class="btn btn-outline-primary btn-sm mr-2"
-          @click.prevent="exportWord"
-        >
+        <button class="btn btn-outline-primary btn-sm mr-2" @click.prevent="exportWord">
           <i class="material-icons">cloud_download</i>
         </button>
 
@@ -187,7 +178,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

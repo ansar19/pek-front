@@ -17,8 +17,6 @@
   </div>
 </template>
 
-
-
 <script>
 import SourceControlWaterTable from '@/components/operational-monitoring/SourceControlWaterTable';
 export default {
@@ -26,7 +24,3 @@ name: "operational-monitoring",
   components: { SourceControlWaterTable }
 }
 </script>
-
-<style scoped>
-
-</style>

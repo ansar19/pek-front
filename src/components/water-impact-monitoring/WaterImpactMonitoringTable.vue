@@ -20,14 +20,12 @@
           </button>
         </router-link>
         <!-- download doc -->
-
         <button
           class="btn btn-outline-primary btn-sm mr-2"
           @click.prevent="exportWord"
         >
           <i class="material-icons">cloud_download</i>
         </button>
-
         <!-- END download doc -->
       </div>
 
@@ -137,7 +135,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
