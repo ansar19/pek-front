@@ -17,8 +17,6 @@
   </div>
 </template>
 
-
-
 <script>
 import RadiationMonitoringTable from '@/components/radiation-monitoring/RadiationMonitoringTable';
 export default {
@@ -28,7 +26,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

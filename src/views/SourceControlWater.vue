@@ -17,8 +17,6 @@
   </div>
 </template>
 
-
-
 <script>
 import SourceControlWaterTable from '@/components/source-control-water/SourceControlWaterTable';
 export default {
@@ -26,7 +24,3 @@ name: "source-control-water",
   components: { SourceControlWaterTable }
 }
 </script>
-
-<style scoped>
-
-</style>

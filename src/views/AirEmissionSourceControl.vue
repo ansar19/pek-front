@@ -6,7 +6,7 @@
         <span class="text-uppercase page-subtitle"> 3. Мониторинг эмиссий. 3.1. Атмосферный воздух</span>
       </div>
     </div>
-    <!-- Default Light Table -->
+    <!-- Table -->
     <div class="row">
       <div class="col">
         <div class="card card-small mb-4">

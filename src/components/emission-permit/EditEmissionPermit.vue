@@ -42,7 +42,7 @@
           </div>
 
           <div class="card-footer border-top mb">
-            <!-- <button class="btn btn-primary waves-effect waves-light mb-4 mr-2" @click="goBack" type="submit">
+            <!-- <button class="btn btn-primary  mb-4 mr-2" @click="goBack" type="submit">
           Назад
         </button> -->
             <div class="row">

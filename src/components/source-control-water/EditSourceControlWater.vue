@@ -20,7 +20,7 @@
 
           <!-- Water Limit table -->
           <div class="table mt-2">
-            
+
             <table class="meta-table table table-stripped table-bordered">
               <tr>
                 <th style="width: 40%;">Наименование источников воздействия (контрольные точки)</th>
@@ -42,10 +42,10 @@
         </form>
       </div>
       <div class="card-footer border-top mb">
-        <button class="btn btn-primary waves-effect waves-light mb-4 mr-2" @click="goBack" type="submit">
+        <button class="btn btn-primary  mb-4 mr-2" @click="goBack" type="submit">
           Назад
         </button>
-        <button class="btn btn-success waves-effect waves-light mb-4" type="submit">
+        <button class="btn btn-success  mb-4" type="submit">
           Создать
           <i class="material-icons right">send</i>
         </button>

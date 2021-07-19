@@ -95,7 +95,7 @@
                               </tbody>
                             </table>
                           </div>
-                          <pre>{{sortedAirEmissionItems}}</pre>
+                          <!-- <pre>{{sortedAirEmissionItems}}</pre> -->
                         </div>
                       </accordion>
                       <!-- END air table -->

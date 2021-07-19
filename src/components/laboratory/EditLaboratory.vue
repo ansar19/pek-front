@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="card-footer border-top mb">
-            <button class="btn btn-success waves-effect waves-light mb-3" type="submit">
+            <button class="btn btn-success  mb-3" type="submit">
               Обновить
               <i class="material-icons right">send</i>
             </button>

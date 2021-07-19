@@ -6,38 +6,28 @@
         <span class="text-uppercase page-subtitle">{{ pageTitle }}</span>
       </d-col>
     </d-row>
-
     <!-- Small Stats Blocks -->
     <d-row>
       <d-col lg v-for="(stats, idx) in smallStats" :key="idx" class="mb-4">
-        <small-stats
-          :id="`small-stats-${idx}`"
-          variation="1"
-          :chart-data="stats.datasets"
-          :label="stats.label"
-          :value="stats.value"
-          :percentage="stats.percentage"
-          :increase="stats.increase"
-          :decrease="stats.decrease"
-        />
+        <small-stats :id="`small-stats-${idx}`" variation="1" :chart-data="stats.datasets" :label="stats.label"
+          :value="stats.value" :percentage="stats.percentage" :increase="stats.increase" :decrease="stats.decrease" />
       </d-col>
     </d-row>
 
     <d-row>
-      <!-- Time Distribution Overview -->
+      <!-- Empty slot -->
       <d-col lg="8" md="6" sm="12" class="mb-4">
-        <!-- <bo-distribution-by-time /> -->
+        <!-- Empty slot -->
       </d-col>
 
-      <!-- Wastes by Types -->
+      <!-- Empty slot -->
       <d-col lg="4" md="6" sm="12" class="mb-4">
-        <!-- <bo-wastes-by-types /> -->
+        <!-- Empty slot -->
       </d-col>
     </d-row>
 
     <d-row>
       <SamplingPointMap />
-
     </d-row>
   </d-container>
 </template>
@@ -45,14 +35,12 @@
 <script>
 import SmallStats from '@/components/common/SmallStats.vue';
 import DistributionByTime from '@/components/stats/DistributionByTime.vue';
-import WastesByTypes from '@/components/stats/WastesByTypes.vue';
 import SamplingPointMap from '@/components/sampling-points-map/SamplingPointMap.vue';
 
 export default {
   components: {
     SmallStats,
     boDistributionByTime: DistributionByTime,
-    boWastesByTypes: WastesByTypes,
     SamplingPointMap
   },
   data() {
@@ -174,4 +162,3 @@ export default {
   },
 };
 </script>
-

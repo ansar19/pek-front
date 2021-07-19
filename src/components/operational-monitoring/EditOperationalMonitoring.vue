@@ -45,7 +45,7 @@
                       @input="responsible => updateResponsible(oml, responsible)" />
                   </td>
                   <td class="align-middle">
-                    <button class="btn-danger btn-sm btn mr-2" @click.prevent="deleteOperationalMonitoringItem(idx)">
+                    <button class="btn-danger btn-sm btn mr-2" @click.prevent="deleteOperationalMonitoringItem(index)">
                       <i class="material-icons">delete</i>
                     </button>
                   </td>
@@ -65,10 +65,10 @@
         </form>
       </div>
       <div class="card-footer border-top mb">
-        <button class="btn btn-primary waves-effect waves-light mb-4 mr-2" @click="goBack" type="submit">
+        <button class="btn btn-primary  mb-4 mr-2" @click="goBack" type="submit">
           Назад
         </button>
-        <button class="btn btn-success waves-effect waves-light mb-4" type="submit">
+        <button class="btn btn-success  mb-4" type="submit">
           Сохранить
           <i class="material-icons right">send</i>
         </button>
@@ -185,8 +185,8 @@ export default {
         responsible: {}
       })
     },
-    deleteOperationalMonitoringItem(idx) {
-      this.operationalMonitoringList.splice(idx, 1)
+    deleteOperationalMonitoringItem(index) {
+      this.operationalMonitoringList.splice(index, 1)
     }
   }
 }

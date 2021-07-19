@@ -2,9 +2,9 @@
   <div class="main-content-container container-fluid px-4">
     <div class="page-header d-flex justify-content-between row no-gutters py-4">
 
-          <h5>Отчеты по результатам производственного экологического контроля
-          </h5>
-          <h5>{{companyType.nameRu}} {{ companyName }}</h5>
+      <h5>Отчеты по результатам производственного экологического контроля
+      </h5>
+      <h5>{{companyType.nameRu}} {{ companyName }}</h5>
     </div>
     <div class="row">
       <div class="col">
