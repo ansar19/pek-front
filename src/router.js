@@ -18,6 +18,7 @@ import AirImpactMonitoring from './views/AirImpactMonitoring.vue';
 import WaterImpactMonitoring from './views/WaterImpactMonitoring.vue';
 import SoilImpactMonitoring from './views/SoilImpactMonitoring.vue';
 import OperationalMonitoring from './views/OperationalMonitoring.vue';
+import SamplingMaps from './views/SamplingMaps.vue';
 
 Vue.use(Router);
 
@@ -331,6 +332,11 @@ export default new Router({
       path: '/show-operational-monitoring', // отчет / результат
       name: 'show-operational-monitoring',
       component: () => import('./components/operational-monitoring/ShowOperationalMonitoring.vue')
+    },
+    {
+      path: '/views/sampling-maps',
+      name: 'sampling-maps',
+      component: SamplingMaps
     },
     {
       path: '*',

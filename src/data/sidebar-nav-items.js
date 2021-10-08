@@ -113,6 +113,13 @@ export default function () {
               name: 'operational-monitoring',
             },
           },
+          {
+            title: 'Редактирование точек на карте',
+            htmlBefore: '<i class="material-icons">engineering</i>',
+            to: {
+              name: 'sampling-maps',
+            },
+          },
         ],
       }, ],
     },

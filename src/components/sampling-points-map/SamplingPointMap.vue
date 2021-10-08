@@ -44,6 +44,21 @@
                 </l-marker>
               </l-layer-group>
 
+              <l-layer-group layer-type="overlay" name="Точки мониторинга радиации" :visible="true">
+                <l-marker v-for="marker in radiationMonitoringPoints" :key="marker.id" :visible="marker.visible"
+                  :lat-lng="marker.position">
+                  <l-tooltip>{{marker.radiationMonitoringPoint}}
+                  </l-tooltip>
+                  <l-popup >
+                    <div>
+                      <p>
+                        {{marker.comment}}
+                      </p>
+                    </div>
+                  </l-popup>
+                </l-marker>
+              </l-layer-group>
+              
             </l-map>
           </div>
         </fieldset>
@@ -57,9 +72,32 @@
             <th style="width:5%">Широта </th>
             <th style="width:85%">Комментарий</th>
           </thead>
+
           <tbody>
             <tr v-for="marker in airImpactSamplingPoints" :key="marker.id">
               <td data-label="Наименование">{{marker.airImpactSamplePoint}}</td>
+              <td data-label="Долгота"> {{marker.position.lat}} </td>
+              <td data-label="Широта"> {{marker.position.lng}} </td>
+              <td data-label="Комментарий">
+                {{marker.comment}}
+              </td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr v-for="marker in soilImpactSamplingPoints" :key="marker.id">
+              <td data-label="Наименование">{{marker.soilImpactSamplePoint}}</td>
+              <td data-label="Долгота"> {{marker.position.lat}} </td>
+              <td data-label="Широта"> {{marker.position.lng}} </td>
+              <td data-label="Комментарий">
+                {{marker.comment}}
+              </td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr v-for="marker in radiationMonitoringPoints" :key="marker.id">
+              <td data-label="Наименование">{{marker.radiationMonitoringPoint}}</td>
               <td data-label="Долгота"> {{marker.position.lat}} </td>
               <td data-label="Широта"> {{marker.position.lng}} </td>
               <td data-label="Комментарий">
@@ -174,6 +212,29 @@ export default {
             lng: 81.5684
           },
           airImpactSamplePoint: "Граница СЗЗ предприятия №2",
+          comment: "Тестовый блок для вывода информации про данную точку",
+          draggable: false,
+          visible: true
+        },
+      ],
+      radiationMonitoringPoints: [{
+          id: "r1",
+          position: {
+            lat: 49.722259680397045,
+            lng: 81.55426025390626
+          },
+          radiationMonitoringPoint: "Точка радиация №1",
+          comment: "Тестовый блок для вывода информации про данную точку",
+          draggable: false,
+          visible: true
+        },
+        {
+          id: "r2",
+          position: {
+            lat: 49.728363084114555,
+            lng: 81.6054153442383
+          },
+          radiationMonitoringPoint: "Точка радиация №2",
           comment: "Тестовый блок для вывода информации про данную точку",
           draggable: false,
           visible: true
