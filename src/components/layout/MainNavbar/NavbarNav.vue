@@ -1,3 +1,21 @@
+<script>
+import { defineComponent } from "@vue/composition-api";
+import { useUserState } from "@/composables/store/useUser";
+
+export default defineComponent({
+  setup(_, ctx) {
+    const user = useUserState();
+    const router = ctx.root.$router;
+    function logout() {
+      localStorage.removeItem("token");
+      router.push("/login");
+    }
+    return { user, logout };
+  },
+});
+</script>
+
+
 <template>
   <d-navbar-nav class="border-left flex-row">
     <!-- <li class="nav-item border-right dropdown notifications">
@@ -43,7 +61,7 @@
           src="@/assets/images/avatars/user-dummy-200x200-1.png"
           alt="User Avatar"
         />
-        <span class="d-none d-md-inline-block">Ерлан Касымхан</span>
+        <span class="d-none d-md-inline-block">{{ user.email }}</span>
       </a>
       <d-collapse id="user-actions" class="dropdown-menu dropdown-menu-small">
         <d-dropdown-item
@@ -52,11 +70,13 @@
           </router-link>
         </d-dropdown-item>
         <d-dropdown-item
-          ><i class="material-icons">&#xE8B8;</i> Редактировать</d-dropdown-item
+          ><i class="material-icons">&#xE8B8;</i> Edit Profile</d-dropdown-item
         >
         <d-dropdown-divider />
         <d-dropdown-item href="#" class="text-danger">
-          <i class="material-icons text-danger">&#xE879;</i> Выйти
+          <span @click="logout">
+            <i class="material-icons text-danger">&#xE879;</i> Выйти
+          </span>
         </d-dropdown-item>
       </d-collapse>
     </li>
